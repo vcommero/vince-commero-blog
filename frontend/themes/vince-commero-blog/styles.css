@@ -1,0 +1,14 @@
+@import url('./views/home-view.css');
+@import url('./views/post-view.css');
+@import url('@fontsource/libre-franklin/index.css');    html {
+--lumo-font-family: Libre Franklin;
+
+    }
+
+    [theme~="dark"] {
+      --lumo-base-color: hsl(214, 33%, 17%);
+      --lumo-primary-color: hsl(214, 78%, 55%);
+      --lumo-primary-color-50pct: hsla(214, 78%, 55%, 0.5);
+      --lumo-primary-color-10pct: hsla(214, 78%, 55%, 0.1);
+
+    }
