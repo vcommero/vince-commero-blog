@@ -1,0 +1,7 @@
+{"properties": [
+  {
+    "name": "firebase.serviceAccountKeyPath",
+    "type": "java.lang.String",
+    "description": "Filepath to the Firebase service account key JSON."
+  }
+]}

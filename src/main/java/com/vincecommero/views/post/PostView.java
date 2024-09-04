@@ -24,128 +24,187 @@ import com.vincecommero.components.avataritem.AvatarItem;
 public class PostView extends Composite<VerticalLayout> {
 
     public PostView() {
-        VerticalLayout layoutColumn2 = new VerticalLayout();
-        VerticalLayout layoutColumn3 = new VerticalLayout();
-        HorizontalLayout layoutRow = new HorizontalLayout();
-        H1 h1 = new H1();
-        Tabs tabs = new Tabs();
-        VerticalLayout layoutColumn4 = new VerticalLayout();
-        HorizontalLayout layoutRow2 = new HorizontalLayout();
-        VerticalLayout layoutColumn5 = new VerticalLayout();
-        H1 h12 = new H1();
-        VerticalLayout layoutColumn6 = new VerticalLayout();
-        H1 h13 = new H1();
-        Paragraph textLarge = new Paragraph();
-        AvatarItem avatarItem = new AvatarItem();
-        HorizontalLayout layoutRow3 = new HorizontalLayout();
-        Span badge = new Span();
-        Hr hr = new Hr();
-        VerticalLayout layoutColumn7 = new VerticalLayout();
-        Paragraph textLarge2 = new Paragraph();
-        getContent().setWidth("100%");
-        getContent().getStyle().set("flex-grow", "1");
-        getContent().setJustifyContentMode(JustifyContentMode.START);
-        getContent().setAlignItems(Alignment.CENTER);
-        layoutColumn2.setWidthFull();
-        getContent().setFlexGrow(1.0, layoutColumn2);
-        layoutColumn2.setPadding(false);
-        layoutColumn2.setWidth("100%");
-        layoutColumn2.setMaxWidth("1140px");
-        layoutColumn2.getStyle().set("flex-grow", "1");
-        layoutColumn3.setWidthFull();
-        layoutColumn2.setFlexGrow(1.0, layoutColumn3);
-        layoutColumn3.setPadding(false);
-        layoutColumn3.setWidth("100%");
-        layoutColumn3.setHeight("min-content");
-        layoutRow.setWidthFull();
-        layoutColumn3.setFlexGrow(1.0, layoutRow);
-        layoutRow.addClassName(Gap.MEDIUM);
-        layoutRow.addClassName(Padding.MEDIUM);
-        layoutRow.setWidth("100%");
-        layoutRow.getStyle().set("flex-grow", "1");
-        h1.setText("Vince Commero");
-        h1.setWidth("max-content");
-        layoutRow.setAlignSelf(FlexComponent.Alignment.END, tabs);
-        tabs.setWidth("100%");
-        setTabsSampleData(tabs);
-        layoutColumn4.setWidthFull();
-        layoutColumn2.setFlexGrow(1.0, layoutColumn4);
-        layoutColumn4.setWidth("100%");
-        layoutColumn4.getStyle().set("flex-grow", "1");
-        layoutRow2.setWidthFull();
-        layoutColumn4.setFlexGrow(1.0, layoutRow2);
-        layoutRow2.addClassName(Gap.MEDIUM);
-        layoutRow2.setWidth("100%");
-        layoutRow2.setHeight("min-content");
-        layoutRow2.setAlignItems(Alignment.START);
-        layoutRow2.setJustifyContentMode(JustifyContentMode.CENTER);
-        layoutColumn5.setHeightFull();
-        layoutRow2.setFlexGrow(1.0, layoutColumn5);
-        layoutColumn5.setWidth("100%");
-        layoutColumn5.getStyle().set("flex-grow", "1");
-        layoutColumn5.setJustifyContentMode(JustifyContentMode.CENTER);
-        layoutColumn5.setAlignItems(Alignment.END);
-        h12.setText("Replace with Image component");
-        h12.setWidth("max-content");
-        layoutColumn6.setHeightFull();
-        layoutRow2.setFlexGrow(1.0, layoutColumn6);
-        layoutColumn6.setWidth("100%");
-        layoutColumn6.getStyle().set("flex-grow", "1");
-        layoutColumn6.setJustifyContentMode(JustifyContentMode.CENTER);
-        layoutColumn6.setAlignItems(Alignment.START);
-        h13.setText("Post Title");
-        h13.setWidth("max-content");
-        textLarge.setText(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-        textLarge.setWidth("100%");
-        textLarge.getStyle().set("font-size", "var(--lumo-font-size-xl)");
-        avatarItem.setWidth("min-content");
-        setAvatarItemSampleData(avatarItem);
-        layoutRow3.setWidthFull();
-        layoutColumn6.setFlexGrow(1.0, layoutRow3);
-        layoutRow3.addClassName(Gap.MEDIUM);
-        layoutRow3.setWidth("100%");
-        layoutRow3.setHeight("min-content");
-        badge.setText("Badge");
-        badge.setWidth("min-content");
-        badge.getElement().getThemeList().add("badge");
-        layoutColumn7.setWidthFull();
-        layoutColumn4.setFlexGrow(1.0, layoutColumn7);
-        layoutColumn7.setWidth("100%");
-        layoutColumn7.getStyle().set("flex-grow", "1");
-        textLarge2.setText(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. This is more text for my blog. Just random text that has no meaning whatsoever. I need to fill this with text to test out how this looks.");
-        textLarge2.setWidth("100%");
-        textLarge2.getStyle().set("font-size", "var(--lumo-font-size-xl)");
-        getContent().add(layoutColumn2);
-        layoutColumn2.add(layoutColumn3);
-        layoutColumn3.add(layoutRow);
-        layoutRow.add(h1);
-        layoutRow.add(tabs);
-        layoutColumn2.add(layoutColumn4);
-        layoutColumn4.add(layoutRow2);
-        layoutRow2.add(layoutColumn5);
-        layoutColumn5.add(h12);
-        layoutRow2.add(layoutColumn6);
-        layoutColumn6.add(h13);
-        layoutColumn6.add(textLarge);
-        layoutColumn6.add(avatarItem);
-        layoutColumn6.add(layoutRow3);
-        layoutRow3.add(badge);
-        layoutColumn4.add(hr);
-        layoutColumn4.add(layoutColumn7);
-        layoutColumn7.add(textLarge2);
+        VerticalLayout content = getContent();
+        content.setWidth("100%");
+        content.getStyle().set("flex-grow", "1");
+        content.setJustifyContentMode(JustifyContentMode.START);
+        content.setAlignItems(Alignment.CENTER);
+
+        VerticalLayout outerContainer = createOuterContainer();
+        content.add(outerContainer);
+
+        VerticalLayout headerContainer = createHeaderContainer();
+        outerContainer.add(headerContainer);
+
+        VerticalLayout bodyContainer = createBodyContainer();
+        outerContainer.add(bodyContainer);
+    }
+    
+    // Component creation helper methods
+
+    private VerticalLayout createOuterContainer() {
+        VerticalLayout outerContainer = new VerticalLayout();
+        outerContainer.setWidthFull();
+        outerContainer.setPadding(false);
+        outerContainer.setMaxWidth("1140px");
+        outerContainer.getStyle().set("flex-grow", "1");
+        return outerContainer;
     }
 
-    private void setTabsSampleData(Tabs tabs) {
-        tabs.add(new Tab("Dashboard"));
-        tabs.add(new Tab("Payment"));
-        tabs.add(new Tab("Shipping"));
+    private VerticalLayout createHeaderContainer() {
+        VerticalLayout headerContainer = new VerticalLayout();
+        headerContainer.setWidthFull();
+        headerContainer.setPadding(false);
+        headerContainer.setHeight("min-content");
+
+        HorizontalLayout headerRow = createHeaderRow();
+        headerContainer.add(headerRow);
+
+        return headerContainer;
+    }
+
+    private HorizontalLayout createHeaderRow() {
+        HorizontalLayout headerRow = new HorizontalLayout();
+        headerRow.setWidthFull();
+        headerRow.addClassName(Gap.MEDIUM);
+        headerRow.addClassName(Padding.MEDIUM);
+        headerRow.getStyle().set("flex-grow", "1");
+
+        H1 nameText = new H1("Vince Commero");
+        nameText.setMinWidth("max-content");
+        nameText.setWidth("max-content");
+
+        Tabs headerTabs = createHeaderTabs();
+
+        headerRow.add(nameText, headerTabs);
+        headerRow.setAlignSelf(FlexComponent.Alignment.END, headerTabs);
+
+        return headerRow;
+    }
+
+    private Tabs createHeaderTabs() {
+        Tabs headerTabs = new Tabs();
+        headerTabs.setWidth("100%");
+        headerTabs.add(new Tab("Home"));
+        headerTabs.add(new Tab("Posts"));
+        return headerTabs;
+    }
+
+    private VerticalLayout createBodyContainer() {
+        VerticalLayout bodyContainer = new VerticalLayout();
+        bodyContainer.setWidthFull();
+        bodyContainer.getStyle().set("flex-grow", "1");
+
+        HorizontalLayout postHeaderContainer = createPostHeaderContainer();
+        bodyContainer.add(postHeaderContainer);
+
+        Hr hr = new Hr();
+        bodyContainer.add(hr);
+
+        VerticalLayout postBodyContainer = createPostBodyContainer();
+        bodyContainer.add(postBodyContainer);
+
+        return bodyContainer;
+    }
+
+    private HorizontalLayout createPostHeaderContainer() {
+        HorizontalLayout postHeaderContainer = new HorizontalLayout();
+        postHeaderContainer.setWidthFull();
+        postHeaderContainer.addClassName(Gap.MEDIUM);
+        postHeaderContainer.setHeight("min-content");
+        postHeaderContainer.setAlignItems(Alignment.START);
+        postHeaderContainer.setJustifyContentMode(JustifyContentMode.CENTER);
+
+        VerticalLayout postPhotoContainer = createPostImageContainer();
+        VerticalLayout postHeaderInfoContainer = createPostHeaderInfoContainer();
+
+        postHeaderContainer.add(postPhotoContainer, postHeaderInfoContainer);
+
+        return postHeaderContainer;
+    }
+
+    private VerticalLayout createPostImageContainer() {
+        VerticalLayout postImageContainer = new VerticalLayout();
+        postImageContainer.setHeightFull();
+        postImageContainer.setWidth("100%");
+        postImageContainer.getStyle().set("flex-grow", "1");
+        postImageContainer.setJustifyContentMode(JustifyContentMode.CENTER);
+        postImageContainer.setAlignItems(Alignment.END);
+
+        H1 postImage = new H1("Replace with Image component");
+        postImage.setWidth("max-content");
+        postImageContainer.add(postImage);
+
+        return postImageContainer;
+    }
+
+    private VerticalLayout createPostHeaderInfoContainer() {
+        VerticalLayout postHeaderInfoContainer = new VerticalLayout();
+        postHeaderInfoContainer.setHeightFull();
+        postHeaderInfoContainer.setWidth("100%");
+        postHeaderInfoContainer.getStyle().set("flex-grow", "1");
+        postHeaderInfoContainer.setJustifyContentMode(JustifyContentMode.CENTER);
+        postHeaderInfoContainer.setAlignItems(Alignment.START);
+
+        H1 postTitleText = new H1("Post Title");
+        postTitleText.setWidth("max-content");
+
+        Paragraph postTitleDescription = new Paragraph(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+        postTitleDescription.setWidth("100%");
+        postTitleDescription.getStyle().set("font-size", "var(--lumo-font-size-xl)");
+
+        AvatarItem authorComponent = createAuthorComponent();
+
+        HorizontalLayout postTagsContainer = createPostTagsContainer();
+
+        postHeaderInfoContainer.add(postTitleText, postTitleDescription, authorComponent, postTagsContainer);
+
+        return postHeaderInfoContainer;
+    }
+
+    private AvatarItem createAuthorComponent() {
+        AvatarItem authorComponent = new AvatarItem();
+        authorComponent.setWidth("min-content");
+        authorComponent.setMinWidth("max-content");
+        setAvatarItemSampleData(authorComponent);
+        return authorComponent;
+    }
+
+    private HorizontalLayout createPostTagsContainer() {
+        HorizontalLayout postTagsContainer = new HorizontalLayout();
+        postTagsContainer.setWidthFull();
+        postTagsContainer.addClassName(Gap.MEDIUM);
+        postTagsContainer.setHeight("min-content");
+
+        Span postTags = new Span("Badge");
+        postTags.setWidth("min-content");
+        postTags.getElement().getThemeList().add("badge");
+
+        postTagsContainer.add(postTags);
+
+        return postTagsContainer;
+    }
+
+    private VerticalLayout createPostBodyContainer() {
+        VerticalLayout postBodyContainer = new VerticalLayout();
+        postBodyContainer.setWidthFull();
+        postBodyContainer.setWidth("100%");
+        postBodyContainer.getStyle().set("flex-grow", "1");
+
+        Paragraph postBody = new Paragraph(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. This is more text for my blog. Just random text that has no meaning whatsoever. I need to fill this with text to test out how this looks.");
+        postBody.setWidth("100%");
+        postBody.getStyle().set("font-size", "var(--lumo-font-size-xl)");
+
+        postBodyContainer.add(postBody);
+
+        return postBodyContainer;
     }
 
     private void setAvatarItemSampleData(AvatarItem avatarItem) {
-        avatarItem.setHeading("Aria Bailey");
-        avatarItem.setDescription("Endocrinologist");
-        avatarItem.setAvatar(new Avatar("Aria Bailey"));
+        avatarItem.setHeading("Vince Commero");
+        avatarItem.setDescription("Software Engineer");
+        avatarItem.setAvatar(new Avatar("Vince Commero"));
     }
 }

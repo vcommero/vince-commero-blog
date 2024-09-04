@@ -1,5 +1,10 @@
 package com.vincecommero.views.home;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Paragraph;
@@ -17,102 +22,189 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.theme.lumo.LumoUtility.Gap;
 import com.vaadin.flow.theme.lumo.LumoUtility.Padding;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import com.vincecommero.components.articlecard.ArticleCardList;
+import com.vincecommero.models.BlogArticle;
 
 @PageTitle("Home")
 @Route(value = "")
 @RouteAlias(value = "")
 public class HomeView extends Composite<VerticalLayout> {
+	
+	private String introTextContentString = "I'm a software engineer with a previous life in Physics and Nuclear Engineering. " +
+			"I enjoy science, technology, history, and philosophy. I'm an avid reader and huge sci-fi fan! " + 
+			"This is a space for me to post my thoughts and share my knowledge. " + 
+			"Hopefully this brings some positive addition to your life!";
 
     public HomeView() {
-        VerticalLayout layoutColumn2 = new VerticalLayout();
-        VerticalLayout layoutColumn3 = new VerticalLayout();
-        HorizontalLayout layoutRow = new HorizontalLayout();
-        H1 h1 = new H1();
-        Tabs tabs = new Tabs();
-        HorizontalLayout layoutRow2 = new HorizontalLayout();
-        VerticalLayout layoutColumn4 = new VerticalLayout();
-        Paragraph textLarge = new Paragraph();
-        VerticalLayout layoutColumn5 = new VerticalLayout();
-        MessageList messageList = new MessageList();
-        getContent().setWidth("100%");
-        getContent().getStyle().set("flex-grow", "1");
-        getContent().setJustifyContentMode(JustifyContentMode.START);
-        getContent().setAlignItems(Alignment.CENTER);
-        layoutColumn2.setWidthFull();
-        getContent().setFlexGrow(1.0, layoutColumn2);
-        layoutColumn2.setPadding(false);
-        layoutColumn2.setWidth("100%");
-        layoutColumn2.setMaxWidth("1140px");
-        layoutColumn2.getStyle().set("flex-grow", "1");
-        layoutColumn2.setJustifyContentMode(JustifyContentMode.START);
-        layoutColumn2.setAlignItems(Alignment.START);
-        layoutColumn3.setWidthFull();
-        layoutColumn2.setFlexGrow(1.0, layoutColumn3);
-        layoutColumn3.setPadding(false);
-        layoutColumn3.setWidth("100%");
-        layoutColumn3.setHeight("min-content");
-        layoutRow.setWidthFull();
-        layoutColumn3.setFlexGrow(1.0, layoutRow);
-        layoutRow.addClassName(Gap.MEDIUM);
-        layoutRow.addClassName(Padding.MEDIUM);
-        layoutRow.setWidth("100%");
-        layoutRow.getStyle().set("flex-grow", "1");
-        h1.setText("Vince Commero");
-        h1.setWidth("max-content");
-        layoutRow.setAlignSelf(FlexComponent.Alignment.END, tabs);
-        tabs.setWidth("100%");
-        setTabsSampleData(tabs);
-        layoutRow2.setWidthFull();
-        layoutColumn2.setFlexGrow(1.0, layoutRow2);
-        layoutRow2.addClassName(Gap.MEDIUM);
-        layoutRow2.addClassName(Padding.MEDIUM);
-        layoutRow2.setWidth("100%");
-        layoutRow2.getStyle().set("flex-grow", "1");
-        layoutRow2.setAlignItems(Alignment.START);
-        layoutRow2.setJustifyContentMode(JustifyContentMode.CENTER);
-        layoutColumn4.setHeightFull();
-        layoutRow2.setFlexGrow(1.0, layoutColumn4);
-        layoutColumn4.setWidth("min-content");
-        layoutColumn4.setMinWidth("25%");
-        layoutColumn4.getStyle().set("flex-grow", "1");
-        textLarge.setText(
-                "I'm a software engineer with a previous life in Physics and Nuclear Engineering. I'm a science and technology buff, so this is a space for me to post my thoughts and share my knowledge on software development, science, and technology for any who might be interested!");
-        textLarge.setWidth("100%");
-        textLarge.getStyle().set("font-size", "var(--lumo-font-size-xl)");
-        layoutColumn5.setHeightFull();
-        layoutRow2.setFlexGrow(1.0, layoutColumn5);
-        layoutColumn5.getStyle().set("flex-grow", "1");
-        layoutColumn5.getStyle().set("flex-grow", "1");
-        messageList.setWidth("100%");
-        setMessageListSampleData(messageList);
-        getContent().add(layoutColumn2);
-        layoutColumn2.add(layoutColumn3);
-        layoutColumn3.add(layoutRow);
-        layoutRow.add(h1);
-        layoutRow.add(tabs);
-        layoutColumn2.add(layoutRow2);
-        layoutRow2.add(layoutColumn4);
-        layoutColumn4.add(textLarge);
-        layoutRow2.add(layoutColumn5);
-        layoutColumn5.add(messageList);
+    	VerticalLayout content = getContent();
+    	content.setWidth("100%");
+    	content.getStyle().set("flex-grow", "1");
+    	content.setJustifyContentMode(JustifyContentMode.START);
+    	content.setAlignItems(Alignment.CENTER);
+    	
+    	VerticalLayout outerContainer = createOuterContainer();
+    	
+        VerticalLayout headerContainer = createHeaderContainer();
+        outerContainer.setFlexGrow(1.0, headerContainer);
+        
+        HorizontalLayout headerRow = createHeaderRow();
+        headerContainer.setFlexGrow(1.0, headerRow);
+        
+        H1 nameText = new H1();
+        nameText.setText("Vince Commero");
+        nameText.setMinWidth("max-content");
+        nameText.setWidth("max-content");
+        
+        Tabs headerTabs = createHeaderTabs();
+        headerRow.setAlignSelf(FlexComponent.Alignment.END, headerTabs);
+        
+        HorizontalLayout bodyContainer = createBodyContainer();
+        outerContainer.setFlexGrow(1.0, bodyContainer);
+        
+        VerticalLayout introContainer = createIntroContainer();
+        bodyContainer.setFlexGrow(1.0, introContainer);
+        
+        Paragraph introText = createIntroText();
+        
+        VerticalLayout postsContainer = createPostsContainer();
+        
+        ArticleCardList articleList = createArticleCardList();
+        
+        
+        content.add(outerContainer);
+        outerContainer.add(headerContainer);
+        headerContainer.add(headerRow);
+        headerRow.add(nameText);
+        headerRow.add(headerTabs);
+        outerContainer.add(bodyContainer);
+        bodyContainer.add(introContainer);
+        introContainer.add(introText);
+        bodyContainer.add(postsContainer);
+        postsContainer.add(articleList);
     }
-
-    private void setTabsSampleData(Tabs tabs) {
-        tabs.add(new Tab("Dashboard"));
-        tabs.add(new Tab("Payment"));
-        tabs.add(new Tab("Shipping"));
+    
+    // Component creation helper methods
+    
+    private VerticalLayout createOuterContainer() {
+    	VerticalLayout outerContainer = new VerticalLayout();
+    	
+    	outerContainer.setWidthFull();
+        outerContainer.setPadding(false);
+        outerContainer.setMaxWidth("1140px");
+        outerContainer.getStyle().set("flex-grow", "1");
+        outerContainer.setJustifyContentMode(JustifyContentMode.START);
+        outerContainer.setAlignItems(Alignment.START);
+    	
+    	return outerContainer;
     }
+    
+    private VerticalLayout createHeaderContainer() {
+    	VerticalLayout headerContainer = new VerticalLayout();
+    	
+    	headerContainer.setWidthFull();
+        headerContainer.setPadding(false);
+        headerContainer.setHeight("min-content");
+    	
+    	return headerContainer;
+    }
+    
+    private HorizontalLayout createHeaderRow() {
+		HorizontalLayout headerRow = new HorizontalLayout();
+		
+		headerRow.setWidthFull();
+        headerRow.addClassName(Gap.MEDIUM);
+        headerRow.addClassName(Padding.MEDIUM);
+        headerRow.getStyle().set("flex-grow", "1");
+		
+		return headerRow;
+	}
+    
+    private Tabs createHeaderTabs() {
+		Tabs tabs = new Tabs();
 
-    private void setMessageListSampleData(MessageList messageList) {
-        MessageListItem message1 = new MessageListItem("Nature does not hurry, yet everything gets accomplished.",
+        tabs.setWidthFull();
+        tabs.add(new Tab("Home"));
+        tabs.add(new Tab("Posts"));
+		
+		return tabs;
+	}
+    
+    private HorizontalLayout createBodyContainer() {
+		HorizontalLayout bodyContainer = new HorizontalLayout();
+		
+		bodyContainer.setWidthFull();
+        bodyContainer.addClassName(Gap.MEDIUM);
+        bodyContainer.addClassName(Padding.MEDIUM);
+        bodyContainer.getStyle().set("flex-grow", "1");
+        bodyContainer.setAlignItems(Alignment.START);
+        bodyContainer.setJustifyContentMode(JustifyContentMode.CENTER);
+		
+		return bodyContainer;
+	}
+    
+    private VerticalLayout createIntroContainer() {
+    	VerticalLayout introContainer = new VerticalLayout();
+		
+        introContainer.setHeightFull();
+        introContainer.setWidth("min-content");
+        introContainer.setMinWidth("25%");
+        introContainer.getStyle().set("flex-grow", "1");
+		
+		return introContainer;
+	}
+    
+    private Paragraph createIntroText() {
+    	Paragraph introText = new Paragraph();
+    	
+    	introText.setText(introTextContentString);
+        introText.setWidth("100%");
+        introText.getStyle().set("font-size", "var(--lumo-font-size-xl)");
+		
+		return introText;
+	}
+    
+    private VerticalLayout createPostsContainer() {
+    	VerticalLayout postsContainer = new VerticalLayout();
+    	
+        postsContainer.setHeightFull();
+        postsContainer.getStyle().set("flex-grow", "1");
+		
+		return postsContainer;
+	}
+    
+    /*
+    private MessageList createMessagesList() {
+    	MessageList messagesList = new MessageList();
+    	messagesList.setWidth("100%");
+    	
+    	MessageListItem message1 = new MessageListItem("Nature does not hurry, yet everything gets accomplished.",
                 LocalDateTime.now().minusDays(1).toInstant(ZoneOffset.UTC), "Matt Mambo");
         message1.setUserColorIndex(1);
         MessageListItem message2 = new MessageListItem(
                 "Using your talent, hobby or profession in a way that makes you contribute with something good to this world is truly the way to go.",
                 LocalDateTime.now().minusMinutes(55).toInstant(ZoneOffset.UTC), "Linsey Listy");
         message2.setUserColorIndex(2);
-        messageList.setItems(message1, message2);
+        messagesList.setItems(message1, message2);
+		
+		return messagesList;
+	}
+    */
+    
+    private ArticleCardList createArticleCardList() {
+    	ArticleCardList cardList = new ArticleCardList();
+    	cardList.setWidthFull();
+    	
+    	List<BlogArticle> articles = new ArrayList<BlogArticle>();
+    	articles.add(new BlogArticle("1", "Vince Commero", "Test Article 1", 
+    			"Just a simple description of this blog article. Should be able to fit all of the text content of this description in the card, or at least truncate if it's too large.",
+    			LocalDateTime.now(), LocalDateTime.now(), "The body of the text goes here. Need to remove this from thumbnails."));
+    	articles.add(new BlogArticle("2", "Vince Commero", "Test Article 2 - The Return of Test Article", 
+    			"Just a simple description of this blog article.",
+    			LocalDateTime.now(), LocalDateTime.now(), "The body of the text goes here. Need to remove this from thumbnails."));
+    	
+    	cardList.setArticles(articles);
+    	
+    	return cardList;
     }
+
 }
