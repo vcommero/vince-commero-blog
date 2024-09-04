@@ -1,0 +1,9 @@
+{
+  "lumoImports" : [ "typography", "color", "spacing", "badge", "utility" ],
+  "assets" : {
+    "@fontsource/libre-franklin" : {
+      "*.css" : "../../../node_modules/@fontsource/libre-franklin",
+      "files/*" : "../../../node_modules/@fontsource/libre-franklin/files"
+    }
+  }
+}
