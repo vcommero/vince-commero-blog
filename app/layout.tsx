@@ -9,8 +9,8 @@ import { theme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
 
 export const metadata = {
-    title: "Mantine Next.js template",
-    description: "I am using Mantine with Next.js!",
+    title: "Vince Commero",
+    description: "Welcome to my corner of the internet!",
 };
 
 export default function RootLayout({ children }: { children: any }) {

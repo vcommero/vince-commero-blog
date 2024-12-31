@@ -5,6 +5,7 @@ import {
     Burger,
     Button,
     Group,
+    Title,
     UnstyledButton,
     useComputedColorScheme,
 } from "@mantine/core";
@@ -45,31 +46,33 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                         size="sm"
                     />
                     <Group justify="space-between" style={{ flex: 1 }}>
-                        <span>Vince Commero</span>
+                        <Title order={2}>Vince Commero</Title>
 
-                        {/* This is the top nav links only visible on desktop. */}
-                        <Group ml="xl" gap={12} visibleFrom="sm">
-                            <UnstyledButton className={classes.control}>
-                                Home
-                            </UnstyledButton>
-                            <UnstyledButton className={classes.control}>
-                                Blog
-                            </UnstyledButton>
-                            <UnstyledButton className={classes.control}>
-                                Contacts
-                            </UnstyledButton>
-                            <UnstyledButton className={classes.control}>
-                                Support
-                            </UnstyledButton>
+                        <Group>
+                            {/* This is the top nav links only visible on desktop. */}
+                            <Group ml="xl" gap={12} visibleFrom="sm">
+                                <UnstyledButton className={classes.control}>
+                                    Home
+                                </UnstyledButton>
+                                <UnstyledButton className={classes.control}>
+                                    Blog
+                                </UnstyledButton>
+                                <UnstyledButton className={classes.control}>
+                                    Contacts
+                                </UnstyledButton>
+                                <UnstyledButton className={classes.control}>
+                                    Support
+                                </UnstyledButton>
+                            </Group>
+
+                            <Button size="sm" onClick={toggleColorScheme}>
+                                {computedColorScheme === "light" ? (
+                                    <FaSun />
+                                ) : (
+                                    <FaMoon />
+                                )}
+                            </Button>
                         </Group>
-
-                        <Button size="sm" onClick={toggleColorScheme}>
-                            {computedColorScheme === "light" ? (
-                                <FaSun />
-                            ) : (
-                                <FaMoon />
-                            )}
-                        </Button>
                     </Group>
                 </Group>
             </AppShell.Header>
