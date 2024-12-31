@@ -65,7 +65,15 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                                 </UnstyledButton>
                             </Group>
 
-                            <Button size="sm" onClick={toggleColorScheme}>
+                            <Button
+                                size="sm"
+                                color={
+                                    computedColorScheme === "light"
+                                        ? "dark"
+                                        : "gray"
+                                }
+                                onClick={toggleColorScheme}
+                            >
                                 {computedColorScheme === "light" ? (
                                     <FaSun />
                                 ) : (

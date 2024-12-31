@@ -5,7 +5,7 @@ import {
     ColorSchemeScript,
     mantineHtmlProps,
 } from "@mantine/core";
-import { theme } from "../theme";
+import { customTheme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
 
 export const metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: any }) {
                 />
             </head>
             <body>
-                <MantineProvider theme={theme}>
+                <MantineProvider theme={customTheme}>
                     <BaseLayout>{children}</BaseLayout>
                 </MantineProvider>
             </body>
