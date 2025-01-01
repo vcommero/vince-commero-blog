@@ -1,12 +1,10 @@
 import { Button } from "@mantine/core";
+import IntroComponent from "../components/IntroComponent";
 
 export default function HomePage() {
     return (
         <div>
-            Home page
-            <Button variant="filled" color="green">
-                Button
-            </Button>
+            <IntroComponent />
         </div>
     );
 }

@@ -13,18 +13,26 @@ import { useDisclosure } from "@mantine/hooks";
 import classes from "./BaseLayout.module.css";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 interface BaseLayoutProps {
     children: React.ReactNode;
 }
 
 export function BaseLayout({ children }: BaseLayoutProps) {
+    const router = useRouter();
+
     const [opened, { toggle }] = useDisclosure();
     const { colorScheme, setColorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme("light");
 
     const toggleColorScheme = () => {
         setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
+    };
+
+    const navigateHome = () => {
+        router.push("/");
+        if (opened) toggle();
     };
 
     return (
@@ -51,17 +59,14 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                         <Group>
                             {/* This is the top nav links only visible on desktop. */}
                             <Group ml="xl" gap={12} visibleFrom="sm">
-                                <UnstyledButton className={classes.control}>
+                                <UnstyledButton
+                                    className={classes.control}
+                                    onClick={navigateHome}
+                                >
                                     Home
                                 </UnstyledButton>
                                 <UnstyledButton className={classes.control}>
-                                    Blog
-                                </UnstyledButton>
-                                <UnstyledButton className={classes.control}>
-                                    Contacts
-                                </UnstyledButton>
-                                <UnstyledButton className={classes.control}>
-                                    Support
+                                    Blogs
                                 </UnstyledButton>
                             </Group>
 
@@ -87,17 +92,14 @@ export function BaseLayout({ children }: BaseLayoutProps) {
 
             {/* This is the side nav only visible on mobile. */}
             <AppShell.Navbar py="md" px={4}>
-                <UnstyledButton className={classes.control}>
+                <UnstyledButton
+                    className={classes.control}
+                    onClick={navigateHome}
+                >
                     Home
                 </UnstyledButton>
                 <UnstyledButton className={classes.control}>
-                    Blog
-                </UnstyledButton>
-                <UnstyledButton className={classes.control}>
-                    Contacts
-                </UnstyledButton>
-                <UnstyledButton className={classes.control}>
-                    Support
+                    Blogs
                 </UnstyledButton>
             </AppShell.Navbar>
 
