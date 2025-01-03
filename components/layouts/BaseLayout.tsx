@@ -4,6 +4,7 @@ import {
     AppShell,
     Burger,
     Button,
+    Container,
     Group,
     Title,
     UnstyledButton,
@@ -46,48 +47,54 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             padding="md"
         >
             <AppShell.Header>
-                <Group h="100%" px="md">
-                    <Burger
-                        opened={opened}
-                        onClick={toggle}
-                        hiddenFrom="sm"
-                        size="sm"
-                    />
-                    <Group justify="space-between" style={{ flex: 1 }}>
-                        <Title order={2}>Vince Commero</Title>
+                <Container size={"xl"} h="100%">
+                    <Group h="100%" px="md">
+                        <Burger
+                            opened={opened}
+                            onClick={toggle}
+                            hiddenFrom="sm"
+                            size="sm"
+                        />
+                        <Group
+                            justify="space-between"
+                            ml={"0"}
+                            style={{ flex: 1 }}
+                        >
+                            <Title order={2}>Vince Commero</Title>
 
-                        <Group>
-                            {/* This is the top nav links only visible on desktop. */}
-                            <Group ml="xl" gap={12} visibleFrom="sm">
-                                <UnstyledButton
-                                    className={classes.control}
-                                    onClick={navigateHome}
+                            <Group>
+                                {/* This is the top nav links only visible on desktop. */}
+                                <Group ml="xl" gap={12} visibleFrom="sm">
+                                    <UnstyledButton
+                                        className={classes.control}
+                                        onClick={navigateHome}
+                                    >
+                                        Home
+                                    </UnstyledButton>
+                                    <UnstyledButton className={classes.control}>
+                                        Blogs
+                                    </UnstyledButton>
+                                </Group>
+
+                                <Button
+                                    size="sm"
+                                    color={
+                                        computedColorScheme === "light"
+                                            ? "dark"
+                                            : "gray"
+                                    }
+                                    onClick={toggleColorScheme}
                                 >
-                                    Home
-                                </UnstyledButton>
-                                <UnstyledButton className={classes.control}>
-                                    Blogs
-                                </UnstyledButton>
+                                    {computedColorScheme === "light" ? (
+                                        <FaSun />
+                                    ) : (
+                                        <FaMoon />
+                                    )}
+                                </Button>
                             </Group>
-
-                            <Button
-                                size="sm"
-                                color={
-                                    computedColorScheme === "light"
-                                        ? "dark"
-                                        : "gray"
-                                }
-                                onClick={toggleColorScheme}
-                            >
-                                {computedColorScheme === "light" ? (
-                                    <FaSun />
-                                ) : (
-                                    <FaMoon />
-                                )}
-                            </Button>
                         </Group>
                     </Group>
-                </Group>
+                </Container>
             </AppShell.Header>
 
             {/* This is the side nav only visible on mobile. */}
@@ -103,7 +110,9 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                 </UnstyledButton>
             </AppShell.Navbar>
 
-            <AppShell.Main>{children}</AppShell.Main>
+            <AppShell.Main>
+                <Container size={"xl"}>{children}</Container>
+            </AppShell.Main>
         </AppShell>
     );
 }

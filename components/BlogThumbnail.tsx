@@ -1,4 +1,4 @@
-import { Card, Text } from "@mantine/core";
+import { Card, Divider, Text } from "@mantine/core";
 import React from "react";
 
 type BlogThumbnailProps = {
@@ -20,6 +20,7 @@ export default function BlogThumbnail(props: BlogThumbnailProps) {
             <Text size="sm" c="dimmed">
                 Updated on: {props.updatedOn.getDate().toString()}
             </Text>
+            <Divider />
             <Text size="sm">{props.description}</Text>
         </Card>
     );
