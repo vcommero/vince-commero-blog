@@ -21,6 +21,8 @@ interface BaseLayoutProps {
 }
 
 export function BaseLayout({ children }: BaseLayoutProps) {
+    const LAYOUT_MAXWIDTH = "50rem";
+
     const router = useRouter();
 
     const [opened, { toggle }] = useDisclosure();
@@ -47,7 +49,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             padding="md"
         >
             <AppShell.Header>
-                <Container size={"xl"} h="100%">
+                <Container size={LAYOUT_MAXWIDTH} h="100%">
                     <Group h="100%" px="md">
                         <Burger
                             opened={opened}
@@ -111,7 +113,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             </AppShell.Navbar>
 
             <AppShell.Main>
-                <Container size={"xl"}>{children}</Container>
+                <Container size={LAYOUT_MAXWIDTH}>{children}</Container>
             </AppShell.Main>
         </AppShell>
     );
