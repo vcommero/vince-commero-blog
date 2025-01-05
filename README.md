@@ -1,5 +1,5 @@
-# Mantine Next Template
+# The Vince Commero Website
 
-Get started with the template by clicking `Use this template` button on the top of the page.
-
-[Documentation](https://mantine.dev/guides/next/)
+This is the app for a blogging and miscellaneous content website I made. The app is a Next.js app 
+that utilizes the Mantine UI framework. Blog articles are rendered from Markdown files which are
+parsed into HTML by the app.
