@@ -21,7 +21,7 @@ interface BaseLayoutProps {
 }
 
 export function BaseLayout({ children }: BaseLayoutProps) {
-    const LAYOUT_MAXWIDTH = "50rem";
+    const LAYOUT_MAXWIDTH = "75rem";
 
     const router = useRouter();
 
@@ -62,7 +62,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                             ml={"0"}
                             style={{ flex: 1 }}
                         >
-                            <Title order={2}>Vince Commero</Title>
+                            <Title order={1}>Vince Commero</Title>
 
                             <Group>
                                 {/* This is the top nav links only visible on desktop. */}
