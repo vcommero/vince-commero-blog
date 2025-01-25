@@ -10,8 +10,8 @@ import {
     UnstyledButton,
     useComputedColorScheme,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import classes from "./BaseLayout.module.css";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import classes from "./BaseLayout.module.scss";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -28,6 +28,8 @@ export function BaseLayout({ children }: BaseLayoutProps) {
     const [opened, { toggle }] = useDisclosure();
     const { colorScheme, setColorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme("light");
+
+    const isMobile = useMediaQuery('(max-width: 768px)');
 
     const toggleColorScheme = () => {
         setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
@@ -62,7 +64,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                             ml={"0"}
                             style={{ flex: 1 }}
                         >
-                            <Title order={1}>Vince Commero</Title>
+                            <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
 
                             <Group>
                                 {/* This is the top nav links only visible on desktop. */}
