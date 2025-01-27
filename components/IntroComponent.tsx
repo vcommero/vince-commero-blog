@@ -1,11 +1,9 @@
 import { Blockquote, Card, Divider, Group, Image, Text } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { customTheme } from "../theme";
-import { useMediaQuery } from "@mantine/hooks";
 
 export default function IntroComponent() {
     return (
-        <Card shadow="sm" radius="lg">
+        <Card radius="lg">
             <Group justify="space-between">
                 <Image
                     src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20220913_110422_3.png?updatedAt=1737759521666&tr=h-450%2Cw-450"

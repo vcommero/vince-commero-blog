@@ -1,12 +1,14 @@
 import "@mantine/core/styles.css";
+import "./styles.css";
 import React from "react";
 import {
     MantineProvider,
     ColorSchemeScript,
     mantineHtmlProps,
 } from "@mantine/core";
-import { customTheme } from "../theme";
+import { shadcnTheme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
+import { shadcnCssVariableResolver } from "../cssVariableResolver";
 
 export const metadata = {
     title: "Vince Commero",
@@ -25,7 +27,7 @@ export default function RootLayout({ children }: { children: any }) {
                 />
             </head>
             <body>
-                <MantineProvider theme={customTheme}>
+                <MantineProvider theme={shadcnTheme} cssVariablesResolver={shadcnCssVariableResolver}>
                     <BaseLayout>{children}</BaseLayout>
                 </MantineProvider>
             </body>
