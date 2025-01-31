@@ -1,12 +1,11 @@
 import "@mantine/core/styles.css";
-import "./styles.css";
 import React from "react";
 import {
     MantineProvider,
     ColorSchemeScript,
     mantineHtmlProps,
 } from "@mantine/core";
-import { shadcnTheme } from "../theme";
+import { customTheme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
 import { shadcnCssVariableResolver } from "../cssVariableResolver";
 
