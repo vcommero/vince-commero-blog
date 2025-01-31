@@ -4,7 +4,9 @@ import {
     Burger,
     Button,
     Container,
+    Drawer,
     Group,
+    NavLink,
     Title,
     useComputedColorScheme,
 } from "@mantine/core";
@@ -27,7 +29,7 @@ const links = [
 export function BaseLayout({ children }: BaseLayoutProps) {
     const router = useRouter();
 
-    const [opened, { toggle }] = useDisclosure();
+    const [opened, { open, close, toggle }] = useDisclosure();
 
     const { colorScheme, setColorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
@@ -43,10 +45,10 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         setIsMounted(true);
     }, []);
 
-    const navLinks = links.map((link) => {
+    const headerLinks = links.map((link) => {
         const navFunction = () => {
             router.push(link.link);
-            if (opened) toggle();
+            close();
         };
         return (
             <Button
@@ -66,6 +68,17 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         );
     });
 
+    const menuLinks = links.map((link) => {
+        const navFunction = () => {
+            router.push(link.link);
+            close();
+        };
+
+        return (
+            <NavLink key={link.label} href={`#${link.link}`} label={link.label} onClick={navFunction} />
+        );
+    });
+
     return (
         <>
             <header className={classes.header}>
@@ -74,7 +87,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                     <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
                     <Group gap={"lg"} >
                         <Group gap={5} visibleFrom="xs" mx="2xl">
-                            {navLinks}
+                            {headerLinks}
                         </Group>
                         <Button
                             size="sm"
@@ -92,6 +105,9 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                         </Button>
                     </Group>
                 </Container>
+                <Drawer opened={opened} onClose={close} >
+                    {menuLinks}
+                </Drawer>
             </header>
             <Container size="xl" >
                 {children}
