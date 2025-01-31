@@ -1,4 +1,5 @@
-import { Card, Divider, Text } from "@mantine/core";
+import { Card, Divider, Stack, Text } from "@mantine/core";
+import { format } from "date-fns";
 import React from "react";
 
 type BlogThumbnailProps = {
@@ -12,16 +13,14 @@ type BlogThumbnailProps = {
 export default function BlogThumbnail(props: BlogThumbnailProps) {
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Text fw={500}>{props.title}</Text>
-            <Text size="sm">{props.author}</Text>
-            <Text size="sm" c="dimmed">
-                Written on: {props.createdOn.getDate().toString()}
-            </Text>
-            <Text size="sm" c="dimmed">
-                Updated on: {props.updatedOn.getDate().toString()}
-            </Text>
-            <Divider />
-            <Text size="sm">{props.description}</Text>
+            <Stack>
+                <Text size="lg" fw={500}>{props.title}</Text>
+                <Text size="md" c="dimmed" my={0}>
+                    {format(props.createdOn.getDate(), "MMMM dd, yyyy")}
+                </Text>
+            </Stack>
+            <Divider m="md" />
+            <Text size="md">{props.description}</Text>
         </Card>
     );
 }

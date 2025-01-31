@@ -23,15 +23,16 @@ export const CONTAINER_SIZES: Record<string, string> = {
 export const customTheme: MantineThemeOverride = createTheme({
     /** Put your mantine theme override here */
     fontSizes: {
-        xs: rem("12px"),
-        sm: rem("14px"),
-        md: rem("16px"),
-        lg: rem("18px"),
-        xl: rem("20px"),
-        "2xl": rem("24px"),
-        "3xl": rem("30px"),
-        "4xl": rem("36px"),
-        "5xl": rem("48px"),
+        "2xs": rem("12px"),
+        xs: rem("14px"),
+        sm: rem("16px"),
+        md: rem("18px"),
+        lg: rem("20px"),
+        xl: rem("24px"),
+        "2xl": rem("30px"),
+        "3xl": rem("36px"),
+        "4xl": rem("48px"),
+        "5xl": rem("60px")
     },
     spacing: {
         "3xs": rem("4px"),
