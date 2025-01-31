@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: any }) {
     return (
         <html lang="en" {...mantineHtmlProps}>
             <head>
-                <ColorSchemeScript />
+                <ColorSchemeScript defaultColorScheme="auto" />
                 <link rel="shortcut icon" href="/favicon.svg" />
                 <meta
                     name="viewport"
@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: any }) {
                 />
             </head>
             <body>
-                <MantineProvider theme={customTheme}>
+                <MantineProvider theme={customTheme} defaultColorScheme="auto">
                     <BaseLayout>{children}</BaseLayout>
                 </MantineProvider>
             </body>

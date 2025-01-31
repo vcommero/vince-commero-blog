@@ -1,7 +1,6 @@
 "use client";
 
 import {
-    AppShell,
     Burger,
     Button,
     Container,
@@ -10,113 +9,82 @@ import {
     UnstyledButton,
     useComputedColorScheme,
 } from "@mantine/core";
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useColorScheme, useDisclosure, useMediaQuery } from "@mantine/hooks";
 import classes from "./BaseLayout.module.scss";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface BaseLayoutProps {
     children: React.ReactNode;
 }
 
-export function BaseLayout({ children }: BaseLayoutProps) {
-    const LAYOUT_MAXWIDTH = "75rem";
+const links = [
+    { link: '/', label: 'Home' },
+    { link: '/blogs', label: 'Blogs' },
+];
 
+export function BaseLayout({ children }: BaseLayoutProps) {
     const router = useRouter();
 
     const [opened, { toggle }] = useDisclosure();
+
     const { colorScheme, setColorScheme } = useMantineColorScheme();
-    const computedColorScheme = useComputedColorScheme("light");
-
-    const isMobile = useMediaQuery('(max-width: 768px)');
-
+    const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
     const toggleColorScheme = () => {
         setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
     };
 
-    const navigateHome = () => {
-        router.push("/");
-        if (opened) toggle();
-    };
+    const isMobile = useMediaQuery('(max-width: 768px)');
+
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const navLinks = links.map((link) => {
+        const navFunction = () => {
+            router.push(link.link);
+            if (opened) toggle();
+        };
+        return (
+            <UnstyledButton key={link.label} className={classes.control} onClick={navFunction} >
+                {link.label}
+            </UnstyledButton>
+        );
+    });
 
     return (
-        <AppShell
-            header={{ height: 60 }}
-            navbar={{
-                width: 300,
-                breakpoint: "sm",
-                collapsed: { desktop: true, mobile: !opened },
-            }}
-            padding="md"
-        >
-            <AppShell.Header>
-                <Container size={LAYOUT_MAXWIDTH} h="100%">
-                    <Group h="100%" px="md">
-                        <Burger
-                            opened={opened}
-                            onClick={toggle}
-                            hiddenFrom="sm"
-                            size="sm"
-                        />
-                        <Group
-                            justify="space-between"
-                            ml={"0"}
-                            style={{ flex: 1 }}
-                        >
-                            <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
-
-                            <Group>
-                                {/* This is the top nav links only visible on desktop. */}
-                                <Group ml="xl" gap={12} visibleFrom="sm">
-                                    <UnstyledButton
-                                        className={classes.control}
-                                        onClick={navigateHome}
-                                    >
-                                        Home
-                                    </UnstyledButton>
-                                    <UnstyledButton className={classes.control}>
-                                        Blogs
-                                    </UnstyledButton>
-                                </Group>
-
-                                <Button
-                                    size="sm"
-                                    color={
-                                        computedColorScheme === "light"
-                                            ? "dark"
-                                            : "gray"
-                                    }
-                                    onClick={toggleColorScheme}
-                                >
-                                    {computedColorScheme === "light" ? (
-                                        <FaSun />
-                                    ) : (
-                                        <FaMoon />
-                                    )}
-                                </Button>
-                            </Group>
-                        </Group>
+        <>
+            <header className={classes.header}>
+                <Container size="xl" className={classes.inner}>
+                    <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
+                    <Group gap={5} visibleFrom="xs">
+                        {navLinks}
                     </Group>
+                    <Button
+                        size="sm"
+                        color={
+                            isMounted && computedColorScheme === "dark" ?
+                                "gray" :
+                                "dark"
+                        }
+                        onClick={toggleColorScheme}
+                    >
+                        {isMounted && (computedColorScheme === "dark" ?
+                            <FaMoon /> :
+                            <FaSun />
+                        )}
+                    </Button>
+
+                    <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
                 </Container>
-            </AppShell.Header>
-
-            {/* This is the side nav only visible on mobile. */}
-            <AppShell.Navbar py="md" px={4}>
-                <UnstyledButton
-                    className={classes.control}
-                    onClick={navigateHome}
-                >
-                    Home
-                </UnstyledButton>
-                <UnstyledButton className={classes.control}>
-                    Blogs
-                </UnstyledButton>
-            </AppShell.Navbar>
-
-            <AppShell.Main>
-                <Container size={LAYOUT_MAXWIDTH}>{children}</Container>
-            </AppShell.Main>
-        </AppShell>
+            </header>
+            <Container size="xl" >
+                {children}
+            </Container>
+        </>
     );
 }
