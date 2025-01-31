@@ -6,10 +6,9 @@ import {
     Container,
     Group,
     Title,
-    UnstyledButton,
     useComputedColorScheme,
 } from "@mantine/core";
-import { useColorScheme, useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import classes from "./BaseLayout.module.scss";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -50,9 +49,20 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             if (opened) toggle();
         };
         return (
-            <UnstyledButton key={link.label} className={classes.control} onClick={navFunction} >
+            <Button
+                key={link.label}
+                variant="subtle"
+                size="lg"
+                p="xs"
+                color={
+                    isMounted && computedColorScheme === "dark" ?
+                        "gray" :
+                        "rgba(0, 0, 0, 1)"
+                }
+                onClick={navFunction}
+            >
                 {link.label}
-            </UnstyledButton>
+            </Button>
         );
     });
 
@@ -60,26 +70,27 @@ export function BaseLayout({ children }: BaseLayoutProps) {
         <>
             <header className={classes.header}>
                 <Container size="xl" className={classes.inner}>
-                    <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
-                    <Group gap={5} visibleFrom="xs">
-                        {navLinks}
-                    </Group>
-                    <Button
-                        size="sm"
-                        color={
-                            isMounted && computedColorScheme === "dark" ?
-                                "gray" :
-                                "dark"
-                        }
-                        onClick={toggleColorScheme}
-                    >
-                        {isMounted && (computedColorScheme === "dark" ?
-                            <FaMoon /> :
-                            <FaSun />
-                        )}
-                    </Button>
-
                     <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
+                    <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
+                    <Group gap={"lg"} >
+                        <Group gap={5} visibleFrom="xs" mx="2xl">
+                            {navLinks}
+                        </Group>
+                        <Button
+                            size="sm"
+                            color={
+                                isMounted && computedColorScheme === "dark" ?
+                                    "gray" :
+                                    "dark"
+                            }
+                            onClick={toggleColorScheme}
+                        >
+                            {isMounted && (computedColorScheme === "dark" ?
+                                <FaMoon /> :
+                                <FaSun />
+                            )}
+                        </Button>
+                    </Group>
                 </Container>
             </header>
             <Container size="xl" >

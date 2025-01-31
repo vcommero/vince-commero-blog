@@ -12,9 +12,7 @@ export default function IntroComponent() {
                     h={250}
                     w="auto"
                     fit="contain"
-                    m="lg"
                 />
-                <Divider size="xl" orientation="vertical" />
                 <Text flex={1} m="lg" size="xl" >
                     {
                         "Hello! I'm Vince Commero and welcome to my corner of the internet! I'm a software engineer with a previous life in Physics and Nuclear Engineering, and an avid interest in science and technology. I'm also into cooking, fitness, enjoying the outdoors, and science fiction. This is a space for me to post my thoughts, share things that I'm doing or working on, and share anything else I find interesting."

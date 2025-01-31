@@ -7,7 +7,6 @@ import {
 } from "@mantine/core";
 import { customTheme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
-import { shadcnCssVariableResolver } from "../cssVariableResolver";
 
 export const metadata = {
     title: "Vince Commero",
