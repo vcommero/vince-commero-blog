@@ -1,4 +1,4 @@
-import { Divider, Stack } from "@mantine/core";
+import { BackgroundImage, Center, Divider, Stack } from "@mantine/core";
 import IntroComponent from "../components/IntroComponent";
 import BlogThumbnail from "../components/BlogThumbnail";
 import { parse } from "date-fns";
@@ -25,8 +25,16 @@ export default function HomePage() {
 
     return (
         <div>
-            <IntroComponent />
-            <Divider size="xl" m="2xl" />
+            <BackgroundImage
+                src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20240704_151724.png?updatedAt=1738733811307&tr=w-4032%2Ch-1779%2Cfo-custom%2Ccm-extract"
+                mb="sm"
+                h={500}
+                p="xl"
+            >
+                <Center>
+                    <IntroComponent />
+                </Center>
+            </BackgroundImage>
             <Stack>
                 {blogItems}
             </Stack>

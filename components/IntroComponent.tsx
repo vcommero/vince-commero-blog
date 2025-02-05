@@ -6,19 +6,19 @@ const IntroText = "Hello and welcome to my corner of the internet! I'm a softwar
 export default function IntroComponent() {
 
     return (
-        <Card radius="lg">
-            <Group justify="space-between" >
-                <Image
-                    src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20220913_110422_3.png?updatedAt=1737759521666&tr=h-450%2Cw-450"
-                    alt="A pic of me!"
-                    radius="lg"
-                    h={250}
-                    w="auto"
-                    fit="contain"
-                />
+        <Group justify="space-between" >
+            <Image
+                src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20220913_110422_3.png?updatedAt=1737759521666&tr=h-450%2Cw-450"
+                alt="A pic of me!"
+                radius="lg"
+                h={250}
+                w="auto"
+                fit="contain"
+            />
+            <Card radius="lg" flex={1}>
                 <Text flex={1} m="lg" size="lg" visibleFrom="xs" >{IntroText}</Text>
                 <Text flex={1} m="lg" size="sm" hiddenFrom="xs" >{IntroText}</Text>
-            </Group>
-        </Card>
+            </Card>
+        </Group>
     );
 }
