@@ -109,6 +109,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                     {menuLinks}
                 </Drawer>
             </header>
+            <div style={{height: "56px"}} />
             <Container size="xl" >
                 {children}
             </Container>

@@ -1,4 +1,4 @@
-import { BackgroundImage, Center, Divider, Stack } from "@mantine/core";
+import { BackgroundImage, Center, Divider, Group, Stack } from "@mantine/core";
 import IntroComponent from "../components/IntroComponent";
 import BlogThumbnail from "../components/BlogThumbnail";
 import { parse } from "date-fns";
@@ -26,15 +26,22 @@ export default function HomePage() {
     return (
         <div>
             <BackgroundImage
+                visibleFrom="xs"
                 src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20240704_151724.png?updatedAt=1738733811307&tr=w-4032%2Ch-1779%2Cfo-custom%2Ccm-extract"
                 mb="sm"
                 h={500}
                 p="xl"
+                display="flex"
+                style={{ alignItems: "center" }}
             >
-                <Center>
+                <Center h="100%">
                     <IntroComponent />
                 </Center>
             </BackgroundImage>
+            <Stack hiddenFrom="xs" >
+                <IntroComponent />
+            </Stack>
+            <Divider hiddenFrom="xs" size="xl" m="lg" />
             <Stack>
                 {blogItems}
             </Stack>
