@@ -8,14 +8,12 @@ import {
     Group,
     NavLink,
     Title,
-    useComputedColorScheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import classes from "./BaseLayout.module.scss";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 interface BaseLayoutProps {
     children: React.ReactNode;
@@ -31,19 +29,9 @@ export function BaseLayout({ children }: BaseLayoutProps) {
 
     const [opened, { open, close, toggle }] = useDisclosure();
 
-    const { colorScheme, setColorScheme } = useMantineColorScheme();
-    const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
-    const toggleColorScheme = () => {
-        setColorScheme(computedColorScheme === "dark" ? "light" : "dark");
-    };
+    const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
     const isMobile = useMediaQuery('(max-width: 768px)');
-
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     const headerLinks = links.map((link) => {
         const navFunction = () => {
@@ -56,11 +44,6 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                 variant="subtle"
                 size="lg"
                 p="xs"
-                color={
-                    isMounted && computedColorScheme === "dark" ?
-                        "gray" :
-                        "rgba(0, 0, 0, 1)"
-                }
                 onClick={navFunction}
             >
                 {link.label}
@@ -91,17 +74,19 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                         </Group>
                         <Button
                             size="sm"
-                            color={
-                                isMounted && computedColorScheme === "dark" ?
-                                    "gray" :
-                                    "dark"
-                            }
+                            color="dark"
                             onClick={toggleColorScheme}
+                            darkHidden
                         >
-                            {isMounted && (computedColorScheme === "dark" ?
-                                <FaMoon /> :
-                                <FaSun />
-                            )}
+                            <FaSun />
+                        </Button>
+                        <Button
+                            size="sm"
+                            color="gray"
+                            onClick={toggleColorScheme}
+                            lightHidden
+                        >
+                            <FaMoon />
                         </Button>
                     </Group>
                 </Container>
@@ -109,7 +94,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                     {menuLinks}
                 </Drawer>
             </header>
-            <div style={{height: "56px"}} />
+            <div style={{ height: "56px" }} />
             <Container size="xl" >
                 {children}
             </Container>

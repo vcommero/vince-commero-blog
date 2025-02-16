@@ -32,9 +32,21 @@ export default function IntroComponent() {
                     w="auto"
                     fit="contain"
                 />
-                <Card radius="lg" flex={1}>
-                    <Text flex={1} m="lg" size="lg" visibleFrom="xs" >{IntroText}</Text>
-                    <Text flex={1} m="lg" size="sm" hiddenFrom="xs" >{IntroText}</Text>
+                <Text
+                    flex={1}
+                    m="lg"
+                    size="2xl"
+                    fw={800}
+                    visibleFrom="xs"
+                    c="white"
+                    //variant="gradient"
+                    //gradient={{ from: 'rgba(209, 209, 209, 1)', to: 'rgba(255, 255, 255, 1)', deg: 180 }}
+                    style={{ textShadow: '3px 3px 6px rgba(0, 0, 0, 0.8)' }}
+                >
+                    {IntroText}
+                </Text>
+                <Card radius="lg" flex={1} hiddenFrom="xs">
+                    <Text flex={1} m="lg" size="sm"  >{IntroText}</Text>
                 </Card>
             </Group>
             <Stack hiddenFrom="xs" align="center" >

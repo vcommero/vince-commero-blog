@@ -1,12 +1,11 @@
 import "@mantine/core/styles.css";
 import React from "react";
 import {
-    MantineProvider,
     ColorSchemeScript,
     mantineHtmlProps,
 } from "@mantine/core";
-import { customTheme } from "../theme";
 import { BaseLayout } from "../components/layouts/BaseLayout";
+import { Providers } from "./providers";
 
 export const metadata = {
     title: "Vince Commero",
@@ -25,9 +24,9 @@ export default function RootLayout({ children }: { children: any }) {
                 />
             </head>
             <body>
-                <MantineProvider theme={customTheme} defaultColorScheme="auto">
+                <Providers>
                     <BaseLayout>{children}</BaseLayout>
-                </MantineProvider>
+                </Providers>
             </body>
         </html>
     );
