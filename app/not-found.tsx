@@ -7,7 +7,7 @@ export default function NotFound() {
     return (
         <Box
             style={{
-                minHeight: '100vh',
+                height: 'calc(100vh - 56px)',
                 backgroundColor: 'var(--mantine-color-body)',
                 display: 'flex',
                 alignItems: 'center',
