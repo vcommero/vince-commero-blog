@@ -107,6 +107,7 @@ export const customTheme = createTheme({
                 shadow: 'xl',
                 radius: 'md',
                 withBorder: true,
+                bg: 'var(--mantine-color-card-bg)',
             },
         },
         Card: {
