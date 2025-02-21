@@ -1,9 +1,10 @@
-import { Paper, Title, Text, Image, Container, List, Divider, ListItem } from '@mantine/core';
+import { Paper, Title, Text, Image, Container, List, Divider, ListItem, Center, Stack, Group } from '@mantine/core';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nord } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { MdOutlineCalendarToday, MdOutlineEditCalendar } from "react-icons/md";
 
 interface BlogPostProps {
     content: string;
@@ -39,13 +40,11 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
         // Custom image rendering using Next.js Image
         img({ src, alt }: any) {
             return (
-                <div>
-                    <Image
-                        src={src || ''}
-                        alt={alt || ''}
-                        fit="cover"
-                    />
-                </div>
+                <Image
+                    src={src || ''}
+                    alt={alt || ''}
+                    fit="cover"
+                />
             );
         },
         // Custom heading styles using Mantine
@@ -86,16 +85,22 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                 <article>
                     <Title order={1}>{title}</Title>
                     {date && (
-                        <Text>
-                            {format(parseISO(date), 'MMMM d, yyyy')}
-                        </Text>
+                        <Group>
+                            <MdOutlineCalendarToday />
+                            <Text>
+                                {format(parseISO(date), 'MMMM d, yyyy')}
+                            </Text>
+                        </Group>
                     )}
                     {updatedDate && (
-                        <Text>
-                            Last updated: {format(parseISO(updatedDate), 'MMMM d, yyyy')}
-                        </Text>
+                        <Group>
+                            <MdOutlineEditCalendar />
+                            <Text>
+                                Last updated: {format(parseISO(updatedDate), 'MMMM d, yyyy')}
+                            </Text>
+                        </Group>
                     )}
-                    <Divider  my="lg"/>
+                    <Divider size="md" my="lg" />
                     <ReactMarkdown components={components}>{processedContent}</ReactMarkdown>
                 </article>
             </Paper>
