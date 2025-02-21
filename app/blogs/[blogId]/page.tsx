@@ -1,26 +1,77 @@
+import { notFound } from "next/navigation";
 import BlogPost from "../../../components/BlogPost";
+import { firestoreDB } from "../../utils/firebase-admin";
+import { format } from "date-fns";
+import { FieldPath } from "firebase-admin/firestore";
+
+// Enable ISR with a revalidation period
+export const revalidate = 300;
+
+// Add dynamic configuration
+export const dynamic = 'force-static';
+export const dynamicParams = false;
 
 interface BlogPageProps {
     params: Promise<{ blogId: string }>;
 }
 
-const blog = {
-    //content: "# A Fancy Header in Markdown%NL%%NL%Just some text here. And more text.%NL%%NL%Another sentence goes here.%NL%%NL%```java%NL%private static void main(string[] args){%NL%    int i = 2;%NL%    return i;%NL%};%NL%```%NL%%NL%",
-    content: "# Dillinger%NL%## _The Last Markdown Editor, Ever_%NL%%NL%[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)%NL%%NL%[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)%NL%%NL%Dillinger is a cloud-enabled, mobile-ready, offline-storage compatible,%NL%AngularJS-powered HTML5 Markdown editor.%NL%%NL%- Type some Markdown on the left%NL%- See HTML in the right%NL%- ✨Magic ✨%NL%%NL%## Features%NL%%NL%- Import a HTML file and watch it magically convert to Markdown%NL%- Drag and drop images (requires your Dropbox account be linked)%NL%- Import and save files from GitHub, Dropbox, Google Drive and One Drive%NL%- Drag and drop markdown and HTML files into Dillinger%NL%- Export documents as Markdown, HTML and PDF%NL%%NL%Markdown is a lightweight markup language based on the formatting conventions%NL%that people naturally use in email.%NL%As [John Gruber] writes on the [Markdown site][df1]%NL%%NL%> The overriding design goal for Markdown's%NL%> formatting syntax is to make it as readable%NL%> as possible. The idea is that a%NL%> Markdown-formatted document should be%NL%> publishable as-is, as plain text, without%NL%> looking like it's been marked up with tags%NL%> or formatting instructions.%NL%%NL%This text you see here is *actually- written in Markdown! To get a feel%NL%for Markdown's syntax, type some text into the left window and%NL%watch the results in the right.%NL%%NL%## Tech%NL%%NL%Dillinger uses a number of open source projects to work properly:%NL%%NL%- [AngularJS] - HTML enhanced for web apps!%NL%- [Ace Editor] - awesome web-based text editor%NL%- [markdown-it] - Markdown parser done right. Fast and easy to extend.%NL%- [Twitter Bootstrap] - great UI boilerplate for modern web apps%NL%- [node.js] - evented I/O for the backend%NL%- [Express] - fast node.js network app framework [@tjholowaychuk]%NL%- [Gulp] - the streaming build system%NL%- [Breakdance](https://breakdance.github.io/breakdance/) - HTML%NL%to Markdown converter%NL%- [jQuery] - duh%NL%%NL%And of course Dillinger itself is open source with a [public repository][dill]%NL% on GitHub.%NL%%NL%## Installation%NL%%NL%Dillinger requires [Node.js](https://nodejs.org/) v10+ to run.%NL%%NL%Install the dependencies and devDependencies and start the server.%NL%%NL%```sh%NL%cd dillinger%NL%npm i%NL%node app%NL%```%NL%%NL%For production environments...%NL%%NL%```sh%NL%npm install --production%NL%NODE_ENV=production node app%NL%```%NL%%NL%## Plugins%NL%%NL%Dillinger is currently extended with the following plugins.%NL%Instructions on how to use them in your own application are linked below.%NL%%NL%| Plugin | README |%NL%| ------ | ------ |%NL%| Dropbox | [plugins/dropbox/README.md][PlDb] |%NL%| GitHub | [plugins/github/README.md][PlGh] |%NL%| Google Drive | [plugins/googledrive/README.md][PlGd] |%NL%| OneDrive | [plugins/onedrive/README.md][PlOd] |%NL%| Medium | [plugins/medium/README.md][PlMe] |%NL%| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |%NL%%NL%## Development%NL%%NL%Want to contribute? Great!%NL%%NL%Dillinger uses Gulp + Webpack for fast developing.%NL%Make a change in your file and instantaneously see your updates!%NL%%NL%Open your favorite Terminal and run these commands.%NL%%NL%First Tab:%NL%%NL%```sh%NL%node app%NL%```%NL%%NL%Second Tab:%NL%%NL%```sh%NL%gulp watch%NL%```%NL%%NL%(optional) Third:%NL%%NL%```sh%NL%karma test%NL%```%NL%%NL%#### Building for source%NL%%NL%For production release:%NL%%NL%```sh%NL%gulp build --prod%NL%```%NL%%NL%Generating pre-built zip archives for distribution:%NL%%NL%```sh%NL%gulp build dist --prod%NL%```%NL%%NL%## Docker%NL%%NL%Dillinger is very easy to install and deploy in a Docker container.%NL%%NL%By default, the Docker will expose port 8080, so change this within the%NL%Dockerfile if necessary. When ready, simply use the Dockerfile to%NL%build the image.%NL%%NL%```sh%NL%cd dillinger%NL%docker build -t <youruser>/dillinger:${package.json.version} .%NL%```%NL%%NL%This will create the dillinger image and pull in the necessary dependencies.%NL%Be sure to swap out `${package.json.version}` with the actual%NL%version of Dillinger.%NL%%NL%Once done, run the Docker image and map the port to whatever you wish on%NL%your host. In this example, we simply map port 8000 of the host to%NL%port 8080 of the Docker (or whatever port was exposed in the Dockerfile):%NL%%NL%```sh%NL%docker run -d -p 8000:8080 --restart=always --cap-add=SYS_ADMIN --name=dillinger <youruser>/dillinger:${package.json.version}%NL%```%NL%%NL%> Note: `--capt-add=SYS-ADMIN` is required for PDF rendering.%NL%%NL%Verify the deployment by navigating to your server address in%NL%your preferred browser.%NL%%NL%```sh%NL%127.0.0.1:8000%NL%```%NL%%NL%## License%NL%%NL%MIT%NL%%NL%**Free Software, Hell Yeah!**%NL%%NL%[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)%NL%%NL%   [dill]: <https://github.com/joemccann/dillinger>%NL%   [git-repo-url]: <https://github.com/joemccann/dillinger.git>%NL%   [john gruber]: <http://daringfireball.net>%NL%   [df1]: <http://daringfireball.net/projects/markdown/>%NL%   [markdown-it]: <https://github.com/markdown-it/markdown-it>%NL%   [Ace Editor]: <http://ace.ajax.org>%NL%   [node.js]: <http://nodejs.org>%NL%   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>%NL%   [jQuery]: <http://jquery.com>%NL%   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>%NL%   [express]: <http://expressjs.com>%NL%   [AngularJS]: <http://angularjs.org>%NL%   [Gulp]: <http://gulpjs.com>%NL%%NL%   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>%NL%   [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>%NL%   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>%NL%   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>%NL%   [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>%NL%   [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>%NL%%NL%",
-    title: "A Test Article",
-    date: "2024-12-20",
-    updatedDate: "2025-01-21"
-};
+// Pre-render all articles at build time
+export async function generateStaticParams() {
+    const articles = await getAllArticleIds();
+    console.log(`Pre-rendering ${articles.length} articles`);
+    console.log(JSON.stringify(articles));
+    return articles;
+}
+
+async function getAllArticleIds() {
+    try {
+        const articlesSnapshot = await firestoreDB.collection('articles')
+            .where('published', '==', true)
+            .get();
+        return articlesSnapshot.docs.map(doc => ({
+            blogId: doc.id
+        }));
+    } catch (error) {
+        console.error('Error fetching article IDs:', error);
+        return [];
+    }
+}
+
+async function getArticle(id: string): Promise<any | null> {
+    try {
+        const documentSnapshot = await firestoreDB.collection('articles')
+            .where('published', '==', true)
+            .where(FieldPath.documentId(), "==", id)
+            .get();
+
+        if (!documentSnapshot.empty) {
+            const doc = documentSnapshot.docs[0];
+            return {
+                id: doc.id,
+                ...doc.data()
+            } as any;
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching article:', error);
+        return null;
+    }
+}
 
 export default async function BlogPage({ params }: BlogPageProps) {
-    const { blogId } = await params;
+    const blogId = await params.then((p) => p.blogId);
+    const article = await getArticle(blogId);
+
+    if (!article) {
+        return notFound();
+    }
 
     return (
         <BlogPost
-            content={blog.content}
-            title={blog.title}
-            date={blog.date}
-            updatedDate={blog.updatedDate}
+            content={article.content}
+            title={article.title}
+            date={format(article.createdOn.toDate(), "yyyy-MM-dd")}
+            updatedDate={format(article.updatedOn.toDate(), "yyyy-MM-dd")}
         />
     );
 }
