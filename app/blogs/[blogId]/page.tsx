@@ -10,11 +10,11 @@ export const revalidate = 300;
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
+const firebaseService = new FirebaseAdminService();
+
 interface BlogPageProps {
     params: Promise<{ blogId: string }>;
 }
-
-const firebaseService = new FirebaseAdminService();
 
 // Pre-render all articles at build time
 export async function generateStaticParams() {
@@ -37,10 +37,10 @@ export default async function BlogPage({ params }: BlogPageProps) {
 
     return (
         <BlogPost
-            content={article.content}
+            content={article.content || ''}
             title={article.title}
             date={format(article.createdOn.toDate(), "yyyy-MM-dd")}
-            updatedDate={format(article.updatedOn.toDate(), "yyyy-MM-dd")}
+            updatedDate={article.updatedOn ? format(article.updatedOn.toDate(), "yyyy-MM-dd") : undefined}
         />
     );
 }

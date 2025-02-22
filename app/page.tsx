@@ -1,23 +1,28 @@
 import { BackgroundImage, Center, Divider, Group, Stack } from "@mantine/core";
 import IntroComponent from "../components/IntroComponent";
 import BlogThumbnail from "../components/BlogThumbnail";
+import { FirebaseAdminService } from "../lib/firebase-admin/firebase-admin-service";
+import { format } from "date-fns";
 
-const blogsData = [
-    { title: "Test Article", author: "Vince Commero", createdOn: "2024-12-05", updatedOn: "2025-01-05", description: "This is a test article that I made. This is the description of that test article, so I'm filling up this space with words... for testing." },
-    { title: "Test Article Two: Electric Boogaloo!", author: "Vince Commero", createdOn: "2024-12-07", updatedOn: "2025-01-15", description: "This is another test article." }
-];
+// Enable ISR with a revalidation period
+export const revalidate = 300;
 
-export default function HomePage() {
+// Add dynamic configuration
+export const dynamic = "force-static";
+export const dynamicParams = false;
 
-    const blogItems = blogsData.map((blog) => {
+const firebaseService = new FirebaseAdminService();
+
+export default async function HomePage() {
+    const articleThumbnailData = await firebaseService.getArticleThumbnails();
+    const blogItems = articleThumbnailData.map((blog) => {
         return (
             <BlogThumbnail
                 key={blog.title}
+                id={blog.id}
                 title={blog.title}
-                author={blog.author}
                 description={blog.description}
-                createdOn={blog.createdOn}
-                updatedOn={blog.updatedOn}
+                createdOn={format(blog.createdOn.toDate(), "yyyy-MM-dd")}
             />
         );
     });
