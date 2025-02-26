@@ -3,8 +3,8 @@ import BlogThumbnail from "../../components/BlogThumbnail";
 import { FirebaseAdminService } from "../../lib/firebase-admin/firebase-admin-service";
 import { format } from "date-fns";
 
-// Enable ISR with a revalidation period
-export const revalidate = 300;
+// Enable ISR with a revalidation period of 30 mins
+export const revalidate = 1800;
 
 // Add dynamic configuration
 export const dynamic = "force-static";

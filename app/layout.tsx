@@ -6,6 +6,7 @@ import {
 } from "@mantine/core";
 import { BaseLayout } from "../components/layouts/BaseLayout";
 import { Providers } from "./providers";
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
     title: "Vince Commero",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: any }) {
                 <Providers>
                     <BaseLayout>{children}</BaseLayout>
                 </Providers>
+                <Analytics />
             </body>
         </html>
     );
