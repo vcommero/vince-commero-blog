@@ -55,6 +55,7 @@ export const customCSSResolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-muted': theme.colors.forest[4],
         '--mantine-color-body': theme.colors.forest[1],
         '--mantine-color-card-bg': theme.colors.forest[0],
+        '--mantine-color-card-hover': theme.colors.forest[3],
     },
     dark: {
         '--mantine-color-primary': theme.colors.dark[0],
@@ -64,6 +65,7 @@ export const customCSSResolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-muted': theme.colors.dark[2],
         '--mantine-color-body': theme.colors.dark[7],
         '--mantine-color-card-bg': theme.colors.dark[6],
+        '--mantine-color-card-hover': theme.colors.dark[3],
     },
 });
 

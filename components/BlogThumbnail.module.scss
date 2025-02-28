@@ -1,0 +1,8 @@
+.card {
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+.card:hover {
+    background-color: var(--mantine-color-card-hover) !important;
+}
