@@ -36,6 +36,30 @@ const colorPalette: Record<string, MantineColorsTuple> = {
         '#A5825B',
         '#8D714F',
     ],
+    darkBlue: [
+        '#748CAB', // lightest blue
+        '#6A80A0',
+        '#5F7496',
+        '#53678C',
+        '#48597C',
+        '#3E5C76',
+        '#2C4A66',
+        '#1D2D44',
+        '#14212F',
+        '#0D1321' // darkest blue
+    ],
+    royalBlue: [
+        '#E9EDF2', // lightest
+        '#D4DEE9',
+        '#B9C9DB',
+        '#9EB3CD',
+        '#83A0BF',
+        '#748CAB', // lighter blue
+        '#5D7A9D',
+        '#46678F',
+        '#3E5C76', // medium blue-gray
+        '#1D2D44'  // darkest
+      ],
 };
 
 export const customCSSResolver: CSSVariablesResolver = (theme) => ({
@@ -58,14 +82,14 @@ export const customCSSResolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-card-hover': theme.colors.forest[3],
     },
     dark: {
-        '--mantine-color-primary': theme.colors.dark[0],
-        '--mantine-color-primary-hover': theme.colors.dark[6],
-        '--mantine-color-border': theme.colors.dark[4],
-        '--mantine-color-text': theme.colors.dark[0],
-        '--mantine-color-muted': theme.colors.dark[2],
-        '--mantine-color-body': theme.colors.dark[7],
-        '--mantine-color-card-bg': theme.colors.dark[6],
-        '--mantine-color-card-hover': theme.colors.dark[3],
+        '--mantine-color-primary': theme.colors.darkBlue[2],
+        '--mantine-color-primary-hover': theme.colors.darkBlue[4],
+        '--mantine-color-border': theme.colors.darkBlue[6],
+        '--mantine-color-text': theme.colors.royalBlue[0],
+        '--mantine-color-muted': theme.colors.royalBlue[3],
+        '--mantine-color-body': theme.colors.darkBlue[9],
+        '--mantine-color-card-bg': theme.colors.royalBlue[9],
+        '--mantine-color-card-hover': theme.colors.darkBlue[6],
     },
 });
 
@@ -73,7 +97,7 @@ export const customTheme = createTheme({
     colors: colorPalette,
     primaryColor: 'forest',
     primaryShade: { light: 6, dark: 5 },
-    
+
     fontSizes: {
         '2xs': '12px',
         xs: '14px',
