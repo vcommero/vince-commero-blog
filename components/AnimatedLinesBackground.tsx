@@ -37,13 +37,22 @@ class Line {
     private gridSize: number;
     private colorRange: AnimatedGridLinesProps['colorRange'];
     private fadeLength: number;
+    private speedModifier: number;
 
-    constructor(canvasWidth: number, canvasHeight: number, gridSize: number, colorRange: AnimatedGridLinesProps['colorRange'], fadeLength: number) {
+    constructor(
+        canvasWidth: number,
+        canvasHeight: number,
+        gridSize: number,
+        colorRange: AnimatedGridLinesProps['colorRange'],
+        fadeLength: number,
+        speedModifier: number,
+    ) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.gridSize = gridSize;
         this.colorRange = colorRange;
         this.fadeLength = fadeLength;
+        this.speedModifier = speedModifier;
 
         // Initialize with default values
         this.x = 0;
@@ -72,7 +81,7 @@ class Line {
         this.direction = Math.floor(Math.random() * 4);
 
         // Random speed
-        this.speed = 1 + Math.random() * 2;
+        this.speed = Math.random() * this.speedModifier;
 
         // Random color within the specified range
         const hue = this.colorRange!.hueMin + Math.random() * (this.colorRange!.hueMax - this.colorRange!.hueMin);
@@ -82,7 +91,7 @@ class Line {
         this.trail = [];
 
         // Random lifespan
-        this.lifespan = 100 + Math.random() * 150;
+        this.lifespan = 100 + Math.random() * 250;
         this.age = 0;
     }
 
@@ -154,9 +163,10 @@ class Line {
 }
 
 export default function AnimatedGridLines({
-    gridSize = 40,
-    lineCount = 15,
-    fadeLength = 15,
+    gridSize = 100,
+    lineCount = 20,
+    fadeLength = 100,
+    speedModifier = 2,
     colorRange = {
         hueMin: 180,
         hueMax: 220,
@@ -197,7 +207,7 @@ export default function AnimatedGridLines({
         resizeCanvas();
 
         const lines: Line[] = Array.from({ length: lineCount }, () =>
-            new Line(canvas.width, canvas.height, gridSize, colorRange, fadeLength)
+            new Line(canvas.width, canvas.height, gridSize, colorRange, fadeLength, speedModifier)
         );
 
         const animate = () => {
@@ -234,7 +244,7 @@ export default function AnimatedGridLines({
             window.removeEventListener('resize', resizeCanvas);
             cancelAnimationFrame(animationId);
         };
-    }, [gridSize, lineCount, fadeLength, colorRange, documentVisible, theme]);
+    }, [gridSize, lineCount, fadeLength, colorRange, speedModifier, documentVisible, theme]);
 
     return (
         <canvas

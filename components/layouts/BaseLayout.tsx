@@ -95,18 +95,23 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                     {menuLinks}
                 </Drawer>
             </header>
-            <div style={{ height: "56px" }} />
+            <div style={{ height: "56px", zIndex: -9999 }} />
             <AnimatedGridLines
                 // Optional customizations
-                gridSize={30}
-                lineCount={20}
-                fadeLength={20}
-                colorRange={{
-                    hueMin: 180,
-                    hueMax: 240,
-                    saturation: 75,
-                    lightness: 55
-                }}
+                speedModifier={1}
+                colorRange={colorScheme == 'dark' ?
+                    {
+                        hueMin: 180,
+                        hueMax: 240,
+                        saturation: 75,
+                        lightness: 55
+                    } :
+                    {
+                        hueMin: 85,
+                        hueMax: 160,
+                        saturation: 75,
+                        lightness: 25
+                    }}
             />
             <Container size="xl" >
                 {children}

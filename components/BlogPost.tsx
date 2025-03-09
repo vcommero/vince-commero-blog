@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { nord } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import { MdOutlineCalendarToday, MdOutlineEditCalendar } from "react-icons/md";
+import CodeblockWrapper from './CodeblockWrapper';
 
 interface BlogPostProps {
     content: string;
@@ -22,15 +23,11 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
         code({ node, inline, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
-                <SyntaxHighlighter
-                    style={nord}
+                <CodeblockWrapper
+                    codeContent={String(children).replace(/\n$/, '')}
                     language={match[1]}
-                    PreTag="div"
-                    className="rounded-md my-4"
-                    {...props}
-                >
-                    {String(children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
+                    otherProps={props}
+                />
             ) : (
                 <code {...props} style={{ backgroundColor: '#f1f3f5', padding: '0.2em 0.4em', borderRadius: '3px' }}>
                     {children}
@@ -44,22 +41,23 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                     src={src || ''}
                     alt={alt || ''}
                     fit="cover"
+                    my="lg"
                 />
             );
         },
         // Custom heading styles using Mantine
         h1: ({ children }: any) => (
-            <Title order={1}>{children}</Title>
+            <Title order={1} mb="xs">{children}</Title>
         ),
         h2: ({ children }: any) => (
-            <Title order={2}>{children}</Title>
+            <Title order={2} mb="xs">{children}</Title>
         ),
         h3: ({ children }: any) => (
-            <Title order={3}>{children}</Title>
+            <Title order={3} mb="xs">{children}</Title>
         ),
         // Custom paragraph styles
         p: ({ children }: any) => (
-            <Text>{children}</Text>
+            <Text mb="lg">{children}</Text>
         ),
         // Custom link styles
         a: ({ children, href }: any) => (
