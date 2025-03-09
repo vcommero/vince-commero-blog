@@ -37,6 +37,8 @@ export default async function HomePage() {
                 p="xl"
                 display="flex"
                 style={{ alignItems: "center" }}
+                my="xl"
+                radius="md"
             >
                 <Center h="100%">
                     <IntroComponent />

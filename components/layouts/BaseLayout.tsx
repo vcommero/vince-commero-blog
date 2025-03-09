@@ -14,6 +14,7 @@ import classes from "./BaseLayout.module.scss";
 import { useMantineColorScheme } from "@mantine/core";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import AnimatedGridLines from "../AnimatedLinesBackground";
 
 interface BaseLayoutProps {
     children: React.ReactNode;
@@ -94,7 +95,24 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                     {menuLinks}
                 </Drawer>
             </header>
-            <div style={{ height: "56px" }} />
+            <div style={{ height: "56px", zIndex: -9999 }} />
+            <AnimatedGridLines
+                // Optional customizations
+                speedModifier={1}
+                colorRange={colorScheme == 'dark' ?
+                    {
+                        hueMin: 180,
+                        hueMax: 240,
+                        saturation: 75,
+                        lightness: 55
+                    } :
+                    {
+                        hueMin: 85,
+                        hueMax: 160,
+                        saturation: 75,
+                        lightness: 25
+                    }}
+            />
             <Container size="xl" >
                 {children}
             </Container>
