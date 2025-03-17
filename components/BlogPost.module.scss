@@ -1,0 +1,7 @@
+.markdownContent p:has(> div) {
+    display: contents;
+}
+
+.markdownContent p>div {
+    margin: 1rem 0;
+}
