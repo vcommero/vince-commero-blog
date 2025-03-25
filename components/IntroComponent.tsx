@@ -29,9 +29,6 @@ export default function IntroComponent() {
                 >
                     {IntroText}
                 </Text>
-                <Card radius="lg" flex={1} hiddenFrom="xs">
-                    <Text flex={1} m="lg" size="sm"  >{IntroText}</Text>
-                </Card>
             </Group>
             <Stack hiddenFrom="xs" align="center" >
                 <Image
@@ -43,8 +40,17 @@ export default function IntroComponent() {
                     fit="cover"
                     mt={20}
                 />
-                <Text flex={1} m="lg" size="lg" visibleFrom="xs" >{IntroText}</Text>
-                <Text flex={1} m="lg" size="sm" hiddenFrom="xs" >{IntroText}</Text>
+                <Card
+                    radius="lg"
+                    p={'2px'}
+                    style={{
+                        backgroundColor: `rgba(255, 255, 255, 0.02)`,
+                        backdropFilter: `blur(5px)`,
+                        border: 0
+                    }}
+                >
+                    <Text flex={1} m="lg" size="sm">{IntroText}</Text>
+                </Card>
             </Stack>
         </>
     );
