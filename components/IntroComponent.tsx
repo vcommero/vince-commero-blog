@@ -23,8 +23,6 @@ export default function IntroComponent() {
                     fw={800}
                     visibleFrom="xs"
                     c="white"
-                    //variant="gradient"
-                    //gradient={{ from: 'rgba(209, 209, 209, 1)', to: 'rgba(255, 255, 255, 1)', deg: 180 }}
                     style={{ textShadow: '3px 3px 6px rgba(0, 0, 0, 0.8)' }}
                 >
                     {IntroText}
