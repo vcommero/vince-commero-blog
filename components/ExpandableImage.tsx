@@ -51,13 +51,13 @@ export default function ExpandableImage({
     }
 
     return (
-        <span>
+        <>
             {/* Thumbnail Image */}
             <Box
                 className={className}
                 component="div"
                 onClick={() => setOpened(true)}
-                style={{ display: 'inline-block' }}
+                style={{ display: 'inline-block', position: 'relative' }}
             >
                 <Image
                     src={thumbnailUrl ?? src}
@@ -70,12 +70,12 @@ export default function ExpandableImage({
                 />
             </Box>
 
-
             {/* Full Size Modal */}
             <Modal
                 opened={opened}
                 onClose={() => setOpened(false)}
                 size="2xl"
+                fullScreen={isMobile}
                 centered
                 withCloseButton
                 styles={{
@@ -104,6 +104,6 @@ export default function ExpandableImage({
                     }}
                 />
             </Modal>
-        </span>
+        </>
     );
 }

@@ -1,8 +1,9 @@
 import { BackgroundImage, Center, Divider, Group, Stack } from "@mantine/core";
-import IntroComponent from "../components/IntroComponent";
+import GreetingComponent from "../components/GreetingComponent";
 import BlogThumbnail from "../components/BlogThumbnail";
 import { FirebaseAdminService } from "../lib/firebase-admin/firebase-admin-service";
 import { format } from "date-fns";
+import LargeSummaryComponent from "../components/LargeSummaryComponent";
 
 // Enable ISR with a revalidation period of 30 mins
 export const revalidate = 1800;
@@ -33,7 +34,7 @@ export default async function HomePage() {
                 visibleFrom="xs"
                 src="https://ik.imagekit.io/bhmwwut65/BlogSiteAssets/20240704_151724.png?updatedAt=1738733811307&tr=w-4032%2Ch-1779%2Cfo-custom%2Ccm-extract"
                 mb="sm"
-                h={500}
+                h={300}
                 p="xl"
                 display="flex"
                 style={{ alignItems: "center" }}
@@ -41,16 +42,21 @@ export default async function HomePage() {
                 radius="md"
             >
                 <Center h="100%">
-                    <IntroComponent />
+                    <GreetingComponent />
                 </Center>
             </BackgroundImage>
             <Stack hiddenFrom="xs" >
-                <IntroComponent />
+                <GreetingComponent />
             </Stack>
             <Divider hiddenFrom="xs" size="xl" m="lg" />
-            <Stack>
-                {blogItems}
-            </Stack>
+            <Group gap="lg" align="start" justify="space-between">
+                <Group visibleFrom="xs">
+                    <LargeSummaryComponent />
+                </Group>
+                <Stack>
+                    {blogItems}
+                </Stack>
+            </Group>
         </div>
     );
 }

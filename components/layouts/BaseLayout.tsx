@@ -97,7 +97,6 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             </header>
             <div style={{ height: "56px", zIndex: -9999 }} />
             <AnimatedGridLines
-                // Optional customizations
                 speedModifier={1}
                 colorRange={colorScheme == 'dark' ?
                     {
@@ -113,7 +112,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
                         lightness: 25
                     }}
             />
-            <Container size="xl" >
+            <Container size="1600px" >
                 {children}
             </Container>
         </>
