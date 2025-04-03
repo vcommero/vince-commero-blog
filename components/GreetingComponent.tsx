@@ -1,4 +1,6 @@
-import { Button, Card, Center, Divider, Group, Image, Stack, Text } from "@mantine/core";
+"use client";
+
+import { Button, Card, Group, Image, Stack, Text } from "@mantine/core";
 import React from "react";
 import styles from "./GreetingComponent.module.scss";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
