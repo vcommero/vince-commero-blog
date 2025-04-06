@@ -1,4 +1,5 @@
 import { Card, Stack, Image, Group, Button, Text, Center, Box } from "@mantine/core";
+import Link from "next/link";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function LargeSummaryComponent() {
@@ -37,8 +38,8 @@ export default function LargeSummaryComponent() {
                     </Text>
                 </Stack>
                 <Group justify="center">
-                    <Button size="sm" component="a" href="https://github.com/vcommero/"><FaGithub size="1.8em" /></Button>
-                    <Button size="sm" component="a" href="https://www.linkedin.com/in/vincent-commero-83b9ba99/"><FaLinkedin size="1.8em" /></Button>
+                    <Button size="sm" component={Link} href="https://github.com/vcommero/" target="_blank"><FaGithub size="1.8em" /></Button>
+                    <Button size="sm" component={Link} href="https://www.linkedin.com/in/vincent-commero-83b9ba99/" target="_blank"><FaLinkedin size="1.8em" /></Button>
                 </Group>
             </Stack>
         </Card>

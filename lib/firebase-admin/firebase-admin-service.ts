@@ -67,4 +67,24 @@ export class FirebaseAdminService {
             return null;
         }
     }
+
+    async getBlogsiteContent(id: string): Promise<any | null> {
+        try {
+            const documentSnapshot = await this.firestoreDB.collection('blogsiteContent')
+                .where(FieldPath.documentId(), "==", id)
+                .get();
+
+            if (!documentSnapshot.empty) {
+                const doc = documentSnapshot.docs[0];
+                return {
+                    id: doc.id,
+                    ...doc.data()
+                };
+            }
+            return null;
+        } catch (error) {
+            console.error('Error fetching blogsite content:', error);
+            return null;
+        }
+    }
 }
