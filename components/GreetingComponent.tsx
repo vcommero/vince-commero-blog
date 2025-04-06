@@ -1,13 +1,18 @@
 "use client";
 
 import { Button, Card, Group, Image, Stack, Text } from "@mantine/core";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./GreetingComponent.module.scss";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const IntroText = "Hello and welcome to my corner of the internet! I'm a software engineer with a previous life in Physics and Nuclear Engineering, and an avid interest in science and technology. I'm also into cooking, fitness, enjoying the outdoors, and science fiction. This is a space for me to post my thoughts, share things that I'm doing or working on, and share anything else I find interesting."
 
 export default function GreetingComponent() {
+    useEffect(() => {
+        // Fix for CSS blur properties not correctly getting set initially
+        const mobileIntroCardElement = document.getElementById("mobileIntroCard");
+        if (mobileIntroCardElement) mobileIntroCardElement.className = styles.mobileIntroCard;
+    }, []);
 
     return (
         <>
@@ -38,6 +43,7 @@ export default function GreetingComponent() {
                     mt={20}
                 />
                 <Card
+                    id="mobileIntroCard"
                     className={styles.mobileIntroCard}
                     radius="lg"
                     p='2px'
