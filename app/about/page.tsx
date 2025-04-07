@@ -24,14 +24,13 @@ export default async function AboutMePage() {
                         src="https://ik.imagekit.io/bhmwwut65/tr:h-450,w-450/BlogSiteAssets/20220913_110422_3.png?updatedAt=1737759521666"
                         alt="A pic of me!"
                         radius="lg"
-                        h={450}
-                        w={450}
+                        h={350}
+                        w={350}
                         fit="contain"
-                        m="3em"
+                        mx="3em"
                     />
-                    <Text size="xl" mx="3em" my="3em" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
+                    <Text size="lg" mx="3em" my="2em" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
                 </Group>
-                <Text hiddenFrom="xs" size="md" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
                 <Text size="lg">
                     {"Interested in working with me or getting to know me professionally? You can find a copy of my resume with my contact info here: "}
                     <Link href="/about/resume">Click me!</Link>
