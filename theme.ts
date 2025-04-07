@@ -59,7 +59,7 @@ const colorPalette: Record<string, MantineColorsTuple> = {
         '#46678F',
         '#3E5C76', // medium blue-gray
         '#1D2D44'  // darkest
-      ],
+    ],
 };
 
 export const customCSSResolver: CSSVariablesResolver = (theme) => ({
@@ -97,6 +97,9 @@ export const customTheme = createTheme({
     colors: colorPalette,
     primaryColor: 'forest',
     primaryShade: { light: 6, dark: 5 },
+
+    fontFamily: 'Verdana, sans-serif',
+    fontFamilyMonospace: 'Monaco, Courier, monospace',
 
     fontSizes: {
         '2xs': '12px',

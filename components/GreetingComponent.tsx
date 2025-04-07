@@ -1,11 +1,19 @@
-import { Button, Card, Center, Divider, Group, Image, Stack, Text } from "@mantine/core";
-import React from "react";
+"use client";
+
+import { Button, Card, Group, Image, Stack, Text } from "@mantine/core";
+import React, { useEffect } from "react";
 import styles from "./GreetingComponent.module.scss";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Link from "next/link";
 
 const IntroText = "Hello and welcome to my corner of the internet! I'm a software engineer with a previous life in Physics and Nuclear Engineering, and an avid interest in science and technology. I'm also into cooking, fitness, enjoying the outdoors, and science fiction. This is a space for me to post my thoughts, share things that I'm doing or working on, and share anything else I find interesting."
 
 export default function GreetingComponent() {
+    useEffect(() => {
+        // Fix for CSS blur properties not correctly getting set initially
+        const mobileIntroCardElement = document.getElementById("mobileIntroCard");
+        if (mobileIntroCardElement) mobileIntroCardElement.className = styles.mobileIntroCard;
+    }, []);
 
     return (
         <>
@@ -36,6 +44,7 @@ export default function GreetingComponent() {
                     mt={20}
                 />
                 <Card
+                    id="mobileIntroCard"
                     className={styles.mobileIntroCard}
                     radius="lg"
                     p='2px'
@@ -43,8 +52,8 @@ export default function GreetingComponent() {
                     <Text flex={1} m="lg" size="sm">{IntroText}</Text>
                 </Card>
                 <Group justify="center">
-                    <Button size="sm" component="a" href="https://github.com/vcommero/" target="_blank"><FaGithub size="1.8em" /></Button>
-                    <Button size="sm" component="a" href="https://www.linkedin.com/in/vincent-commero-83b9ba99/" target="_blank"><FaLinkedin size="1.8em" /></Button>
+                    <Button size="sm" component={Link} href="https://github.com/vcommero/" target="_blank"><FaGithub size="1.8em" /></Button>
+                    <Button size="sm" component={Link} href="https://www.linkedin.com/in/vincent-commero-83b9ba99/" target="_blank"><FaLinkedin size="1.8em" /></Button>
                 </Group>
             </Stack>
         </>
