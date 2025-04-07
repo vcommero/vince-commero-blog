@@ -54,7 +54,7 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
             <Title order={3} mb="xs">{children}</Title>
         ),
         p: ({ children }: any) => (
-            <Text mb="lg">{children}</Text>
+            <Text mb="lg" style={{whiteSpace: 'pre-wrap'}}>{children}</Text>
         ),
         a: ({ children, href }: any) => (
             <Link href={href} target="_blank" rel="noopener noreferrer">
