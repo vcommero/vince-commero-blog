@@ -66,7 +66,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
     return (
         <>
             <header className={classes.header}>
-                <Container size="xl" className={classes.inner}>
+                <Container size="1600px" className={classes.inner}>
                     <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
                     <Title order={isMobile ? 3 : 1}>Vince Commero</Title>
                     <Group gap={"lg"} >
