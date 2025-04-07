@@ -20,7 +20,6 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
 
     // Custom components for ReactMarkdown
     const components = {
-        // Custom code block rendering with syntax highlighting
         code({ node, inline, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
@@ -35,7 +34,6 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                 </code>
             );
         },
-        // Custom image rendering using Next.js Image
         img({ src, alt }: any) {
             return (
                 <Center my="lg">
@@ -46,7 +44,6 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                 </Center>
             );
         },
-        // Custom heading styles using Mantine
         h1: ({ children }: any) => (
             <Title order={1} mb="xs">{children}</Title>
         ),
@@ -56,17 +53,14 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
         h3: ({ children }: any) => (
             <Title order={3} mb="xs">{children}</Title>
         ),
-        // Custom paragraph styles
         p: ({ children }: any) => (
             <Text mb="lg">{children}</Text>
         ),
-        // Custom link styles
         a: ({ children, href }: any) => (
             <Link href={href} target="_blank" rel="noopener noreferrer">
                 {children}
             </Link>
         ),
-        // Custom list styles
         ul: ({ children }: any) => (
             <List>{children}</List>
         ),
@@ -79,7 +73,7 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
     };
 
     return (
-        <Container size="lg" mt="lg" className={styles.markdownContent}>
+        <Container size="lg" my="xl" className={styles.markdownContent}>
             <Paper shadow="sm" radius="md">
                 <div>
                     <Title order={1}>{title}</Title>

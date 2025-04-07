@@ -33,7 +33,7 @@ export default function LargeSummaryComponent() {
                             //opacity: 0.8 - (index * 0.2)
                         }}
                     />
-                    <Text>
+                    <Text size="sm">
                         Software Engineer, Tech Enthusiast, & Curious Mind
                     </Text>
                 </Stack>

@@ -41,7 +41,7 @@ export default function BlogThumbnail({
             }}
         >
             <Stack>
-                <Text size="xl" fw={500}>{title}</Text>
+                <Text size="xl" fw={700}>{title}</Text>
                 <Group>
                     <MdOutlineCalendarToday />
                     <Text size="md" c="dimmed" my={0}>

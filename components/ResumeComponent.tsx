@@ -19,7 +19,7 @@ export default function ResumeComponent({ content, updatedDate }: ResumeComponen
         code({ node, inline, className, children, ...props }: any) {
             return (
                 <code {...props} style={{
-                    backgroundColor: 'var(--mantine-color-primary)', //'#f1f3f5',
+                    backgroundColor: 'var(--mantine-color-primary)',
                     color: '#f1f3f5',
                     padding: '0.2em 0.4em',
                     borderRadius: '3px'
@@ -28,7 +28,6 @@ export default function ResumeComponent({ content, updatedDate }: ResumeComponen
                 </code>
             );
         },
-        // Custom image rendering using Next.js Image
         img({ src, alt }: any) {
             return (
                 <Center my="lg">
@@ -39,7 +38,6 @@ export default function ResumeComponent({ content, updatedDate }: ResumeComponen
                 </Center>
             );
         },
-        // Custom heading styles using Mantine
         h1: ({ children }: any) => (
             <Title order={1} mb="xs">{children}</Title>
         ),
@@ -49,17 +47,14 @@ export default function ResumeComponent({ content, updatedDate }: ResumeComponen
         h3: ({ children }: any) => (
             <Title order={3} mb="xs">{children}</Title>
         ),
-        // Custom paragraph styles
         p: ({ children }: any) => (
             <span><Text mb="lg">{children}</Text></span>
         ),
-        // Custom link styles
         a: ({ children, href }: any) => (
             <Link href={href} target="_blank" rel="noopener noreferrer">
                 {children}
             </Link>
         ),
-        // Custom list styles
         ul: ({ children }: any) => (
             <List mb="md">{children}</List>
         ),

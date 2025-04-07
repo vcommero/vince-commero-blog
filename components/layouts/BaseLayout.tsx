@@ -23,6 +23,7 @@ interface BaseLayoutProps {
 const links = [
     { link: '/', label: 'Home' },
     { link: '/blogs', label: 'Blogs' },
+    { link: '/about', label: 'About'}
 ];
 
 export function BaseLayout({ children }: BaseLayoutProps) {
