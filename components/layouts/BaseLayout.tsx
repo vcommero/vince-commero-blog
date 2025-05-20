@@ -8,6 +8,7 @@ import {
     Group,
     NavLink,
     Title,
+    useComputedColorScheme,
 } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import classes from "./BaseLayout.module.scss";
@@ -32,6 +33,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
     const [opened, { open, close, toggle }] = useDisclosure();
 
     const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+    const computedColorScheme = useComputedColorScheme();
 
     const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -99,7 +101,7 @@ export function BaseLayout({ children }: BaseLayoutProps) {
             <div style={{ height: "56px", zIndex: -9999 }} />
             <AnimatedGridLines
                 speedModifier={1}
-                colorRange={colorScheme == 'dark' ?
+                colorRange={computedColorScheme == 'dark' ?
                     {
                         hueMin: 180,
                         hueMax: 240,

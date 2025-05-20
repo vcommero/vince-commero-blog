@@ -1,6 +1,6 @@
 import { Card, Stack, Image, Group, Button, Text, Center, Box } from "@mantine/core";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function LargeSummaryComponent() {
 
