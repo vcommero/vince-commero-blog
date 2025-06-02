@@ -34,7 +34,7 @@ export default function LargeSummaryComponent() {
                         }}
                     />
                     <Text size="sm">
-                        Software Engineer, Tech Enthusiast, & Curious Mind
+                        Software Engineer, Tech Enthusiast, & Autodidact
                     </Text>
                 </Stack>
                 <Group justify="center">

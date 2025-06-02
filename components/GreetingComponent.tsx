@@ -23,7 +23,7 @@ export default function GreetingComponent() {
                     flex={1}
                     m="lg"
                     mx="10rem"
-                    size="2xl"
+                    size="xl"
                     fw={700}
                     visibleFrom="xs"
                     c="white"
