@@ -21,7 +21,7 @@ export default async function AboutMePage() {
                 </Group>
                 <Group>
                     <Image
-                        src="https://ik.imagekit.io/bhmwwut65/tr:h-450,w-450/BlogSiteAssets/20220913_110422_3.png?updatedAt=1737759521666"
+                        src="https://ik.imagekit.io/bhmwwut65/tr:w-450,h-450/BlogSiteAssets/20250503_150245_2.png?updatedAt=1747891885727"
                         alt="A pic of me!"
                         radius="lg"
                         h={350}
@@ -40,6 +40,15 @@ export default async function AboutMePage() {
             <Stack gap="xl" hiddenFrom="xs">
                 <Group justify="center" ta="center">
                     <Title order={2}>{"I'm Vince Commero and welcome to my corner of the internet!"}</Title>
+                    <Image
+                        src="https://ik.imagekit.io/bhmwwut65/tr:w-450,h-450/BlogSiteAssets/20250503_150245_2.png?updatedAt=1747891885727"
+                        alt="A pic of me!"
+                        radius="lg"
+                        h={250}
+                        w={250}
+                        fit="contain"
+                        mx="3em"
+                    />
                 </Group>
                 <Text size="md" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
                 <Text size="md">
