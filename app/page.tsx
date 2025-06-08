@@ -8,7 +8,7 @@ import LargeSummaryComponent from "../components/LargeSummaryComponent";
 // Enable ISR with a revalidation period of 30 mins
 export const revalidate = 1800;
 
-// Add dynamic configuration
+// Force static generation
 export const dynamic = "force-static";
 export const dynamicParams = false;
 

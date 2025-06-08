@@ -3,8 +3,8 @@ import BlogPost from "../../../components/BlogPost";
 import { format } from "date-fns";
 import { FirebaseAdminService } from "../../../lib/firebase-admin/firebase-admin-service";
 
-// Enable ISR with a revalidation period
-export const revalidate = 300;
+// Enable ISR with a revalidation period of 30 mins
+export const revalidate = 1800;
 
 // Add dynamic configuration
 export const dynamic = "force-static";
@@ -23,8 +23,6 @@ export async function generateStaticParams() {
     console.log(JSON.stringify(articles));
     return articles;
 }
-
-
 
 // BlogPage component
 export default async function BlogPage({ params }: BlogPageProps) {
