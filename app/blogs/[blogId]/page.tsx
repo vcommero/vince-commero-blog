@@ -3,13 +3,6 @@ import BlogPost from "../../../components/BlogPost";
 import { format } from "date-fns";
 import { FirebaseAdminService } from "../../../lib/firebase-admin/firebase-admin-service";
 
-// Enable ISR with a revalidation period of 30 mins
-export const revalidate = 1800;
-
-// Add dynamic configuration
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
 const firebaseService = new FirebaseAdminService();
 
 interface BlogPageProps {
@@ -37,7 +30,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
         <BlogPost
             content={article.content || ''}
             title={article.title}
-            date={format(article.createdOn.toDate(), "yyyy-MM-dd")}
+            date={article.createdOn ? format(article.createdOn.toDate(), "yyyy-MM-dd") : undefined}
             updatedDate={article.updatedOn ? format(article.updatedOn.toDate(), "yyyy-MM-dd") : undefined}
         />
     );

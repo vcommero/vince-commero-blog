@@ -3,13 +3,6 @@ import BlogThumbnail from "../../components/BlogThumbnail";
 import { FirebaseAdminService } from "../../lib/firebase-admin/firebase-admin-service";
 import { format } from "date-fns";
 
-// Enable ISR with a revalidation period of 30 mins
-export const revalidate = 1800;
-
-// Force static regeneration
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
 const firebaseService = new FirebaseAdminService();
 
 export default async function BlogsListPage() {
