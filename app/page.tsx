@@ -8,10 +8,6 @@ import LargeSummaryComponent from "../components/LargeSummaryComponent";
 // Enable ISR with a revalidation period of 30 mins
 export const revalidate = 1800;
 
-// Add dynamic configuration
-export const dynamic = "force-static";
-export const dynamicParams = false;
-
 const firebaseService = new FirebaseAdminService();
 
 export default async function HomePage() {

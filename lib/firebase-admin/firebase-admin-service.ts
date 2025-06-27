@@ -1,5 +1,6 @@
 import { FieldPath, Firestore, Timestamp } from "firebase-admin/firestore";
 import { firestoreDB } from "./firebase-admin-config";
+import { isProduction } from "../environment";
 
 export type BlogArticle = {
     id: string;
@@ -12,17 +13,21 @@ export type BlogArticle = {
 
 export class FirebaseAdminService {
     private firestoreDB: Firestore;
+    private isProduction: Boolean;
 
     constructor() {
         this.firestoreDB = firestoreDB;
+        this.isProduction = isProduction();
     }
 
     async getArticleThumbnails() {
         try {
-            const articlesSnapshot = await this.firestoreDB.collection('articles')
-                .select('title', 'description', 'createdOn')
-                .where('published', '==', true)
-                .get();
+            let firestoreQuery = this.firestoreDB.collection('articles')
+                .select('title', 'description', 'createdOn');
+            if (this.isProduction) {
+                firestoreQuery = firestoreQuery.where('published', '==', true);
+            }
+            const articlesSnapshot = await firestoreQuery.get();
             return articlesSnapshot.docs.map(doc => ({
                 id: doc.id,
                 ...doc.data()
@@ -35,9 +40,11 @@ export class FirebaseAdminService {
 
     async getAllArticleIds() {
         try {
-            const articlesSnapshot = await this.firestoreDB.collection('articles')
-                .where('published', '==', true)
-                .get();
+            let firestoreQuery = this.firestoreDB.collection('articles').select(); // Gets only the document reference data (including ids)
+            if (this.isProduction) {
+                firestoreQuery = firestoreQuery.where('published', '==', true);
+            }
+            const articlesSnapshot = await firestoreQuery.get();
             return articlesSnapshot.docs.map(doc => ({
                 blogId: doc.id
             }));
@@ -49,9 +56,12 @@ export class FirebaseAdminService {
 
     async getArticle(id: string): Promise<BlogArticle | null> {
         try {
-            const documentSnapshot = await this.firestoreDB.collection('articles')
-                .where('published', '==', true)
-                .where(FieldPath.documentId(), "==", id)
+            let firestoreQuery = this.firestoreDB.collection('articles')
+                .where(FieldPath.documentId(), "==", id);
+            if (this.isProduction) {
+                firestoreQuery = firestoreQuery.where('published', '==', true);
+            }
+            const documentSnapshot = await firestoreQuery
                 .get();
 
             if (!documentSnapshot.empty) {
