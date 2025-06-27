@@ -6,7 +6,7 @@ import { MdOutlineCalendarToday, MdOutlineEditCalendar } from "react-icons/md";
 import CodeblockWrapper from './CodeblockWrapper';
 import ExpandableImage from './ExpandableImage';
 import styles from "./BlogPost.module.scss";
-import remarkUnwrapImages from 'remark-unwrap-images';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 
 interface BlogPostProps {
     content: string;
@@ -23,12 +23,14 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
         code({ node, inline, className, children, ...props }: any) {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
+                // Code blocks
                 <CodeblockWrapper
                     codeContent={String(children).replace(/\n$/, '')}
                     language={match[1]}
                     otherProps={props}
                 />
             ) : (
+                // Incline code snippets
                 <code {...props} style={{ backgroundColor: '#f1f3f5', padding: '0.2em 0.4em', borderRadius: '3px' }}>
                     {children}
                 </code>
@@ -94,7 +96,7 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                         </Group>
                     )}
                     <Divider size="md" my="lg" />
-                    <ReactMarkdown components={components} remarkPlugins={[remarkUnwrapImages]}>{processedContent}</ReactMarkdown>
+                    <ReactMarkdown components={components} rehypePlugins={[rehypeUnwrapImages]}>{processedContent}</ReactMarkdown>
                 </div>
             </Paper>
         </Container>
