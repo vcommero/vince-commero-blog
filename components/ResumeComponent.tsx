@@ -1,7 +1,7 @@
 import { Container, Group, Paper, Title, Text, Divider, Center, List, ListItem } from "@mantine/core";
 import { MdOutlineEditCalendar } from "react-icons/md";
 import ReactMarkdown from "react-markdown";
-import remarkUnwrapImages from 'remark-unwrap-images';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 import ExpandableImage from "./ExpandableImage";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
@@ -85,7 +85,7 @@ export default function ResumeComponent({ content, updatedDate }: ResumeComponen
                             <Divider size="md" my="lg" />
                         </>
                     )}
-                    <ReactMarkdown components={components} remarkPlugins={[remarkUnwrapImages]}>{processedContent}</ReactMarkdown>
+                    <ReactMarkdown components={components} remarkPlugins={[rehypeUnwrapImages]}>{processedContent}</ReactMarkdown>
                 </div>
             </Paper>
         </Container>
