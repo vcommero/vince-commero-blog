@@ -7,6 +7,7 @@ import {
 import { BaseLayout } from "../components/layouts/BaseLayout";
 import { Providers } from "./providers";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
     title: "Vince Commero",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: { children: any }) {
                     <BaseLayout>{children}</BaseLayout>
                 </Providers>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
