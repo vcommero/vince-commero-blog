@@ -30,7 +30,7 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                     otherProps={props}
                 />
             ) : (
-                // Incline code snippets
+                // Inline code snippets
                 <code {...props} style={{
                     color: 'var(--mantine-color-text-code)',
                     backgroundColor: 'var(--mantine-color-text-code-bg)',
