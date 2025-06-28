@@ -31,7 +31,12 @@ export default function BlogPost({ content, title, date, updatedDate }: BlogPost
                 />
             ) : (
                 // Incline code snippets
-                <code {...props} style={{ backgroundColor: '#f1f3f5', padding: '0.2em 0.4em', borderRadius: '3px' }}>
+                <code {...props} style={{
+                    color: 'var(--mantine-color-text-code)',
+                    backgroundColor: 'var(--mantine-color-text-code-bg)',
+                    padding: '0.1em 0.2em',
+                    borderRadius: '3px'
+                }}>
                     {children}
                 </code>
             );

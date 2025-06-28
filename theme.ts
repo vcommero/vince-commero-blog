@@ -80,6 +80,8 @@ export const customCSSResolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-body': theme.colors.forest[1],
         '--mantine-color-card-bg': theme.colors.forest[0],
         '--mantine-color-card-hover': theme.colors.forest[3],
+        '--mantine-color-text-code': theme.colors.forest[6],
+        '--mantine-color-text-code-bg': theme.colors.forest[1]
     },
     dark: {
         '--mantine-color-primary': theme.colors.darkBlue[2],
@@ -90,6 +92,8 @@ export const customCSSResolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-body': theme.colors.darkBlue[9],
         '--mantine-color-card-bg': theme.colors.royalBlue[9],
         '--mantine-color-card-hover': theme.colors.darkBlue[6],
+        '--mantine-color-text-code': theme.colors.royalBlue[0],
+        '--mantine-color-text-code-bg': theme.colors.royalBlue[8]
     },
 });
 
