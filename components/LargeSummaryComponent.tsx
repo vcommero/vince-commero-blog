@@ -39,7 +39,7 @@ export default function LargeSummaryComponent() {
                 </Stack>
                 <Group justify="center">
                     <Button size="sm" component={Link} href="https://github.com/vcommero/" target="_blank"><FaGithub size="1.8em" /></Button>
-                    <Button size="sm" component={Link} href="https://www.linkedin.com/in/vincent-commero-83b9ba99/" target="_blank"><FaLinkedin size="1.8em" /></Button>
+                    <Button size="sm" component={Link} href="https://www.linkedin.com/in/vincent-commero/" target="_blank"><FaLinkedin size="1.8em" /></Button>
                 </Group>
             </Stack>
         </Card>

@@ -31,10 +31,11 @@ export default async function AboutMePage() {
                     />
                     <Text size="lg" mx="3em" my="2em" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
                 </Group>
+                {/* REMOVED UNTIL PROPER EMAIL FORWARDING IS SET UP.
                 <Text size="lg">
-                    {"Interested in working with me or getting to know me professionally? You can find a copy of my resume with my contact info here: "}
-                    <Link href="/about/resume">Click me!</Link>
+                    {"Interested in working with me or getting to know me professionally? Feel free to send me a message on LinkedIn or email me at: "}
                 </Text>
+                */}
             </Stack>
             {/* Mobile view */}
             <Stack gap="xl" hiddenFrom="xs">
@@ -51,10 +52,11 @@ export default async function AboutMePage() {
                     />
                 </Group>
                 <Text size="md" style={{ flex: 1, whiteSpace: 'pre-wrap' }}>{aboutMeContent}</Text>
+                {/* REMOVED UNTIL PROPER EMAIL FORWARDING IS SET UP.
                 <Text size="md">
-                    {"Interested in working with me or getting to know me professionally? You can find a copy of my resume with my contact info here: "}
-                    <Link href="/about/resume">Click me!</Link>
+                    {"Interested in working with me or getting to know me professionally? Feel free to send me a message on LinkedIn or email me at: "}
                 </Text>
+                */}
             </Stack>
         </Card>
     );
